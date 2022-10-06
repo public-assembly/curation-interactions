@@ -4,7 +4,7 @@ import { useAccount } from 'wagmi'
 
 const hardcodedCuratorAddress = "0xEd824d01B337Fb423554185464dbF7D85034446B"
 
-const goerliNetwork = 4
+const goerliNetwork = 5
 
 // const mainnetNetwork = 1
 

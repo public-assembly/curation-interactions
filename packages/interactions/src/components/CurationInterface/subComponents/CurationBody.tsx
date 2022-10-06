@@ -25,13 +25,13 @@ export function CurationBody({
   userAddress,
 }: CurationFooterProps) {
   return (
-    <div className=" mx-[24px] h-fit w-full ">
+    <div className=" h-fit w-full ">
       {connectionStatus ? (
         <>
           {!addView ? (
             <div className=" mb-[24px] h-fit w-full flex-row flex-wrap justify-center text-sm ">
               {holderStatus || ownerStatus ? (
-                <div className="item-end flex h-[80px] w-full flex-row flex-wrap justify-center border-b-2 border-gray-700">
+                <div className="flex h-[80px] w-full flex-row flex-wrap justify-center border-b-2 border-gray-700">
                   <button
                     onClick={() => addViewFn(true)}
                     className="w-full bg-[#050A09] p-2 text-[18px] text-[#ECF1F0]">
@@ -53,7 +53,7 @@ export function CurationBody({
                     </div>
                   </div>
 
-                  <div className="item-end flex h-[80px] w-full flex-row flex-wrap justify-center border-b-2 border-gray-700 opacity-50">
+                  <div className=" flex h-[80px] w-full flex-row flex-wrap justify-center border-b-2 border-gray-700 opacity-50">
                     <button
                       disabled={true}
                       className="w-full bg-[#050A09] p-2 text-[16px] text-[#ECF1F0]">
@@ -63,7 +63,7 @@ export function CurationBody({
                 </div>
               )}
 
-              <div className="item-end flex h-[80px] w-full flex-row flex-wrap justify-center">
+              <div className=" flex h-[80px] w-full flex-row flex-wrap justify-center">
                 <button
                   disabled={true}
                   className=" w-full bg-[#050A09] p-2 text-[16px] text-[#ECF1F0] opacity-50">
@@ -71,7 +71,7 @@ export function CurationBody({
                 </button>
               </div>
               {ownerStatus ? (
-                <div className="item-end flex h-[80px] w-full flex-row flex-wrap justify-center border-t-2 border-gray-700 border-opacity-50">
+                <div className="flex h-[80px] w-full flex-row flex-wrap justify-center border-t-2 border-gray-700 border-opacity-50">
                   <button
                     disabled={true}
                     className=" w-full bg-[#050A09] p-2 text-[16px] text-[#ECF1F0] opacity-50">
@@ -83,7 +83,7 @@ export function CurationBody({
               )}
             </div>
           ) : (
-            <div className="flex h-fit w-full flex-row flex-wrap justify-center">
+            <div className="flex h-full w-full flex-row flex-wrap justify-center bg-[#FF89DE]">
               <PrepListings
                 curationContractAddress={curationContractAddress}
                 userAddress={userAddress}
@@ -92,7 +92,7 @@ export function CurationBody({
           )}
         </>
       ) : (
-        <div className="mb-[24px] space-y-[24px]">
+        <div className="mx-[24px]  mb-[24px] space-y-[24px]">
           <div className="h-fit w-full flex-row flex-wrap justify-center text-sm ">
             <div className="item-end flex h-[80px] w-full flex-row flex-wrap justify-center">
               <button className="w-full bg-black p-2 text-[18px] text-[#ECF1F0]">
