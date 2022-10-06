@@ -49,7 +49,7 @@ export function FunctionsTest({
     // getListingsLoading,
 
     // addListing
-    // addListingConfig,
+    addListingConfig,
     addListingConfigError,
     addListingWrite,
     // addListingWriteData,
@@ -94,8 +94,8 @@ export function FunctionsTest({
     // txnFreezeAtStatus,
 
     // updateRenderer
-    updateRendererConfig,
-    updateRendererConfigError,
+    // updateRendererConfig,
+    // updateRendererConfigError,
     updateRendererWrite,
     // updateRendererWriteData,
     // updateRendererWriteError,
@@ -112,8 +112,8 @@ export function FunctionsTest({
     // txnUpdateCurationPassStatus,
 
     // updateSortOrder
-    updateSortOrderConfig,
-    updateSortOrderConfigError,
+    // updateSortOrderConfig,
+    // updateSortOrderConfigError,
     updateSortOrderWrite,
     // updateSortOrderWriteData,
     // updateSortOrderWriteError,
@@ -153,12 +153,9 @@ export function FunctionsTest({
 
   // console.log("getListings read return: ", getListingsString)
   // console.log("getListings read data: ", getListingsRead)
-  // console.log("what data coming : ", addListingWriteData)
-  // console.log("addlistingconfig: ", addListingConfig)
-  console.log('updateRendererConfig: ', updateRendererConfig)
-  console.log('updateRendererConfigerror: ', updateRendererConfigError)
-  console.log('updateSortConfig: ', updateSortOrderConfig)
-  console.log('updateSortConfigError: ', updateSortOrderConfigError)
+  console.log('what data coming : ', addListingWrite)
+  console.log('addlistingconfig: ', addListingConfig)
+  console.log('addlistingconfig: ', addListingConfigError)
 
   return (
     <>

@@ -47,7 +47,7 @@ CurationAuthNavProps) {
               <div className="mb-4 w-full text-[48px] sm:mb-0 sm:w-fit">Add</div>
               <div className="w-full text-[48px] sm:w-fit sm:pl-2">Tracks</div>
               <div className=" mt-2 w-full text-[14px] font-light">
-                You can add up to 10 new songs per transaction.
+                You can add up to 5 new songs per transaction.
               </div>
             </div>
           )}

@@ -8,7 +8,7 @@ export type CurationValidationProps = {
   /**
    * userAddress: send in wallet address to check nft balance of
    * curationContractAddress: address of curation contract being queried
-   * network: network for the zdk to query from (1 = mainnet, 4 = goerli)
+   * network: network for the zdk to query from (1 = mainnet, 5 = goerli)
    * zoraApiKey: optional zora api key to pass into zora zdk fetch of user curation tokens
    */
   userAddress: string

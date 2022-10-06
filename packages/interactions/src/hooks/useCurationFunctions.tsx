@@ -9,6 +9,8 @@ import {
 import { BigNumber } from 'ethers'
 import { curatorAbi } from '../protocol/abi/curatorImpl'
 
+import * as blah from '@public-assembly/curation-protocol/dist/artifacts/out/Curator.sol/Curator.json'
+
 export type CurationFunctionsProps = {
   /**
    * curationContractAddress: Curator contract address
@@ -83,7 +85,7 @@ export function useCurationFunctions({
   const { config: addListingConfig, error: addListingConfigError } =
     usePrepareContractWrite({
       addressOrName: curationContractAddress,
-      contractInterface: curatorAbi,
+      contractInterface: blah.abi,
       functionName: 'addListings',
       args: [listings],
     })

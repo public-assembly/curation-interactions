@@ -2,9 +2,9 @@ import Link from "next/link"
 import { ValidationTest } from '@public-assembly/curation-interactions'
 import { useAccount } from 'wagmi'
 
-const hardcodedCuratorAddress = "0x9c1eD19E7015c40716141039f8Ae43cEACCF30fd"
+const hardcodedCuratorAddress = "0xEd824d01B337Fb423554185464dbF7D85034446B"
 
-const goerliNetwork = 4
+const goerliNetwork = 5
 
 // const mainnetNetwork = 1
 

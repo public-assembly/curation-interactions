@@ -2,24 +2,26 @@ import Link from "next/link"
 
 import { FunctionsTest } from "@public-assembly/curation-interactions"
 
-const hardcodedCuratorAddress = "0x9c1eD19E7015c40716141039f8Ae43cEACCF30fd"
+const hardcodedCuratorAddress = "0xEd824d01B337Fb423554185464dbF7D85034446B"
 
 const listing1 = [
   "0x3795102c8508e0912b937ee263904d488407abba",
   1,
-  "0x153D2A196dc8f1F6b9Aa87241864B3e4d4FEc170",
+  "0x806164c929Ad3A6f4bd70c2370b3Ef36c64dEaa8",
   4,
   0,
-  true   
+  true,
+  1   
 ]
 
 const listing2 = [
   "0x3795102c8508e0912b937ee263904d488407abba",
   2,
-  "0x153D2A196dc8f1F6b9Aa87241864B3e4d4FEc170",
+  "0x806164c929Ad3A6f4bd70c2370b3Ef36c64dEaa8",
   4,
   0,
-  true   
+  true,
+  1   
 ]
 
 const arrayOfArrays = [
@@ -35,7 +37,7 @@ const newRendererAddress = "0x0000000000000000000000000000000000000000"
 
 const newRendererInitializer = "0x0000000000000000000000000000000000000000000000000000000000000000"
 
-const newCurationPassAddress = "0x0000000000000000000000000000000000000000"
+const newCurationPassAddress = "0x34fe32e6442d14d923953a537b8163365630b5a7"
 
 const newSortOrderIds = [0, 1]
 
@@ -57,6 +59,9 @@ function Functions() {
             </a>
         </Link>              
         <h1>Functions</h1>
+        <div>
+          {JSON.stringify(arrayOfArrays)}
+        </div>
         <FunctionsTest 
         curationContractAddress={hardcodedCuratorAddress}
         listings={arrayOfArrays}
