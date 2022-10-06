@@ -129,15 +129,17 @@ export function useValidation({
     [balanceOfData, userCurationPassBalance]
   )
 
-  const isCurationOwner = React.useMemo(
-    () =>
-      ownerData
+  const isCurationOwner = React.useMemo(() => {
+    if (address && curationOwnerAddress) {
+      return ownerData
         ? curationOwnerAddress.toLowerCase() === address.toLowerCase()
           ? true
           : false
-        : false,
-    [ownerData, curationOwnerAddress, address]
-  )
+        : false
+    } else {
+      return false
+    }
+  }, [ownerData, curationOwnerAddress, address])
 
   // curation limit read call
 
