@@ -1,15 +1,9 @@
 /* @ts-ignore */
 import * as React from 'react'
 import { shortenAddress } from '../utils/shortenAddress'
+import { useAccount } from 'wagmi'
 
 export type HeaderProps = {
-  /**
-   * connectionStatus:
-   * userAddress:
-   * ownerStatus:
-   */
-  connectionStatus: boolean
-  userAddress: string
   ownerStatus: boolean
   addView: boolean
   addViewFn: Function
@@ -17,24 +11,20 @@ export type HeaderProps = {
 }
 
 export function CurationHeader({
-  connectionStatus,
-  userAddress,
   ownerStatus,
   addView,
   addViewFn,
   closeButton,
 }: HeaderProps) {
+  const { isConnected, address } = useAccount()
+
   return (
     <div className="h-fit w-full flex-row flex-wrap justify-center space-y-[24px] p-[24px] ">
       <div className="flex w-full flex-row">
-        {!connectionStatus || (connectionStatus && !addView) ? (
+        {!isConnected || (isConnected && !addView) ? (
           <></>
         ) : (
           <div className="flex  w-full flex-row justify-start">
-            {/* <img
-                        className="flex flex-row justify-center"
-                        src="../curationModalIcons/back/backDefault.svg"
-                    /> */}
             <button onClick={() => addViewFn(false)}>
               <svg
                 width="32"
@@ -57,34 +47,22 @@ export function CurationHeader({
         )}
         {closeButton && <div className="justify-end">{closeButton}</div>}
       </div>
-      {connectionStatus ? (
+      {isConnected && (
         <div className="flex h-fit w-full flex-row text-sm">
           <div className="flex flex-row space-x-2 border-[1px] border-black px-2 py-1">
             <div className=" flex h-[14px] w-[14px] flex-row self-center bg-[#00FD01] text-transparent">
               {'blank'}
             </div>
             <div className=" flex h-fit w-fit flex-row justify-start self-center">
-              {shortenAddress(userAddress)}
+              {shortenAddress(address)}
             </div>
           </div>
-          {ownerStatus ? (
+          {ownerStatus && (
             <div className="ml-2 flex flex-row  border-[1px] border-black py-1 px-2">
-              {'CONTRACT OWNER'}
+              CONTRACT OWNER
             </div>
-          ) : (
-            <></>
           )}
         </div>
-      ) : (
-        <></>
-        // <div className="pl-4 flex h-full w-full flex-row flex-wrap ">
-        //   <div className="h-6/12 flex w-full flex-row flex-wrap justify-start">
-        //     {'no user connected'}
-        //   </div>
-        //   <div className="h-6/12 flex w-full flex-row flex-wrap justify-start">
-        //     {'no owner'}
-        //   </div>
-        // </div>
       )}
     </div>
   )

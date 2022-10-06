@@ -1,6 +1,7 @@
 /* @ts-ignore */
 import * as React from 'react'
 import { useValidation } from '../../hooks/useValidation'
+import { useAccount } from 'wagmi'
 
 export type CurationValidationProps = {
   /**
@@ -16,7 +17,6 @@ export type CurationValidationProps = {
 }
 
 export function ValidationTest({
-  userAddress,
   curationContractAddress,
   network,
 }: CurationValidationProps) {
@@ -30,16 +30,20 @@ export function ValidationTest({
     frozenAt,
     isPaused,
   } = useValidation({
-    userAddress,
     curationContractAddress,
     network,
   })
 
-  const curationLimitToRender = curationLimit === 0 ? 'uncapped' : curationLimit
+  const { address } = useAccount()
+
+  const curationLimitToRender = React.useMemo(
+    () => (curationLimit === 0 ? 'uncapped' : curationLimit),
+    [curationLimit]
+  )
 
   return (
     <div className="flex flex-col gap-1 rounded-xl border border-solid border-gray-200 p-4 text-black">
-      <div>{'Current User Address: ' + userAddress}</div>
+      <div>{'Current User Address: ' + address}</div>
       <div>{'Current Contract Address ' + curationContractAddress}</div>
       <div>{'Curation Pass Address: ' + curationPassAddress}</div>
       <div>{'User Balance of Curation Pass: ' + userCurationPassBalance}</div>

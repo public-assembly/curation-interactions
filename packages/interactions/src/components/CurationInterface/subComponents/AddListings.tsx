@@ -30,7 +30,7 @@ export function AddListings({
     <div className="mb-[24px] flex w-full flex-row ">
       <button
         className="h-[48px] w-full bg-[#050A09] p-2 text-[#ECF1F0]"
-        onClick={() => addListingWrite?.()}
+        onClick={addListingWrite}
         disabled={listings.length === 0 ? true : false}>
         Add
       </button>
