@@ -8,7 +8,7 @@ function Interface() {
   const [isConnected, setIsConnected] = useState<boolean>(false)
 
 
-  const hardcodedCurationContractAddress = "0x9c1eD19E7015c40716141039f8Ae43cEACCF30fd"
+  const hardcodedCurationContractAddress = "0xEd824d01B337Fb423554185464dbF7D85034446B"
 
   const hardcodedNetwork = 4
 

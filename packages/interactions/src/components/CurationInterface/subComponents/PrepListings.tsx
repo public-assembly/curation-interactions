@@ -29,7 +29,7 @@ export function PrepListings({
     curationTargetType: 1,
     sortOrder: 0,
     hasTokenId: false,
-    // chainId: 1, --- not implemented yet
+    chainId: 1,
   })
 
   const [listingsToAddV2, setListingsToAddV2] = useState({

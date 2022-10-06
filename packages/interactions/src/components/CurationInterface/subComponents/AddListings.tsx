@@ -8,21 +8,35 @@ export type AddListingsProps = {
 }
 
 export function AddListings({ curationContractAddress, bs }: AddListingsProps) {
+  // const listings = [
+  //   [
+  //     bs.curatedAddress,
+  //     bs.selectedTokenId,
+  //     bs.curator,
+  //     bs.curationTargetType,
+  //     bs.sortOrder,
+  //     bs.hasTokenId,
+  //     bs.chainId
+  //   ],
+  // ]
+
   const listings = [
-    [
-      bs.curatedAddress,
-      bs.selectedTokenId,
-      bs.curator,
-      bs.curationTargetType,
-      bs.sortOrder,
-      bs.hasTokenId,
-    ],
+    Object.values({
+      curatedAddress: '0x74e65ee234d93116ae224d77fb7fb813ba360e8a',
+      selectedTokenId: 0,
+      curator: '0x806164c929Ad3A6f4bd70c2370b3Ef36c64dEaa8',
+      curationTargetType: 1,
+      sortOrder: 0,
+      hasTokenId: false,
+      chainId: 4,
+    }),
   ]
 
   console.log('listings, ', listings)
 
   const {
     addListingWrite,
+    addListingWriteError,
     addListingConfig,
     addListingConfigError,
     txnAddListingStatus,
@@ -30,6 +44,9 @@ export function AddListings({ curationContractAddress, bs }: AddListingsProps) {
     curationContractAddress,
     listings,
   })
+
+  console.log('addListingWriteError', addListingWriteError)
+  console.log('addlistingconfig', addListingConfig)
 
   return (
     <div className="mb-[24px] flex w-full flex-row ">
