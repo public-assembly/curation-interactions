@@ -16,8 +16,7 @@ export function CurationAuthNav({
   ownerStatus,
   holderStatus,
   addView,
-}: // addViewFn
-CurationAuthNavProps) {
+}: CurationAuthNavProps) {
   return (
     <div className="flex h-fit w-full flex-row flex-wrap content-start px-[24px] ">
       {connectionStatus ? (

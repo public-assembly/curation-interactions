@@ -2,7 +2,7 @@
 import * as React from 'react'
 import { PrepListings } from './PrepListings'
 
-export type CurationFooterProps = {
+export type CurationBodyProps = {
   /**
    * connectionStatus:
    */
@@ -13,6 +13,7 @@ export type CurationFooterProps = {
   addViewFn: Function
   curationContractAddress: string
   userAddress: string
+  connectButton?: JSX.Element
 }
 
 export function CurationBody({
@@ -23,7 +24,8 @@ export function CurationBody({
   addViewFn,
   curationContractAddress,
   userAddress,
-}: CurationFooterProps) {
+  connectButton,
+}: CurationBodyProps) {
   return (
     <div className=" h-fit w-full ">
       {connectionStatus ? (
@@ -31,10 +33,10 @@ export function CurationBody({
           {!addView ? (
             <div className=" mb-[24px] h-fit w-full flex-row flex-wrap justify-center text-sm ">
               {holderStatus || ownerStatus ? (
-                <div className="flex h-[80px] w-full flex-row flex-wrap justify-center border-b-2 border-gray-700">
+                <div className="flex h-[80px] w-full flex-row flex-wrap justify-center ">
                   <button
                     onClick={() => addViewFn(true)}
-                    className="w-full bg-[#050A09] p-2 text-[18px] text-[#ECF1F0]">
+                    className="mx-[24px] w-full border-b-2 border-gray-700 bg-[#050A09] p-2 text-[18px] text-[#ECF1F0]">
                     {'Add tracks'}
                   </button>
                 </div>
@@ -66,15 +68,15 @@ export function CurationBody({
               <div className=" flex h-[80px] w-full flex-row flex-wrap justify-center">
                 <button
                   disabled={true}
-                  className=" w-full bg-[#050A09] p-2 text-[16px] text-[#ECF1F0] opacity-50">
+                  className=" mx-[24px] w-full bg-[#050A09] p-2 text-[16px] text-[#ECF1F0] opacity-50">
                   {'Remove tracks (coming soon)'}
                 </button>
               </div>
               {ownerStatus ? (
-                <div className="flex h-[80px] w-full flex-row flex-wrap justify-center border-t-2 border-gray-700 border-opacity-50">
+                <div className="flex h-[80px] w-full flex-row flex-wrap justify-center ">
                   <button
                     disabled={true}
-                    className=" w-full bg-[#050A09] p-2 text-[16px] text-[#ECF1F0] opacity-50">
+                    className="mx-[24px] w-full border-t-2 border-gray-700 border-opacity-50 bg-[#050A09] p-2 text-[16px] text-[#ECF1F0] opacity-50">
                     {'Manage contract (coming soon)'}
                   </button>
                 </div>
@@ -96,7 +98,7 @@ export function CurationBody({
           <div className="h-fit w-full flex-row flex-wrap justify-center text-sm ">
             <div className="item-end flex h-[80px] w-full flex-row flex-wrap justify-center">
               <button className="w-full bg-black p-2 text-[18px] text-[#ECF1F0]">
-                Connect
+                {connectButton}
               </button>
             </div>
           </div>

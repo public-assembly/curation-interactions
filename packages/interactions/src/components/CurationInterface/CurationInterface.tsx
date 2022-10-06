@@ -1,12 +1,11 @@
 /* @ts-ignore */
 import * as React from 'react'
 import { useValidation } from '../../hooks/useValidation'
-// import { useCurationFunctions } from '@public-assembly/assemble-curation-functions'
-// import { ConnectButton } from "@rainbow-me/rainbowkit"
 import { useState, useEffect } from 'react'
 import { CurationHeader } from './subComponents/CurationHeader'
 import { CurationAuthNav } from './subComponents/CurationAuthNav'
 import { CurationBody } from './subComponents/CurationBody'
+import { useAccount } from 'wagmi'
 
 export type AllMyProps = {
   /**
@@ -16,23 +15,19 @@ export type AllMyProps = {
    * network:
    * listings:
    */
-  connectionStatus: boolean
   userAddress: string
   curationContractAddress: string
   network: number
   closeButton?: JSX.Element
+  connectButton?: JSX.Element
 }
-
-// export type ListingProps = {
-//   listings?: string | string[] | any[] | [string, number, boolean][] // Listing[] memory listings
-// }
 
 export function CurationInterface({
   // shared inputs
-  connectionStatus,
   userAddress,
   curationContractAddress,
   closeButton,
+  connectButton,
 
   // useValidation inputs
   network,
@@ -51,13 +46,10 @@ export function CurationInterface({
     network,
   })
 
-  // useCurationFunctions
-  // const { getListingsRead } = useCurationFunctions({
-  //   curationContractAddress,
-  // })
-
   // component wide state
   const [addTracksView, setAddTracksView] = useState<boolean>(false)
+
+  const { isConnected } = useAccount()
 
   // const [currentTimeStamp, setCurrentTimeStamp] = useState<number>(0)
 
@@ -96,20 +88,16 @@ export function CurationInterface({
   }
 
   useEffect(() => {
-    if (!connectionStatus) {
+    if (!isConnected) {
       resetAddViewState()
     }
-  }, [connectionStatus])
+  }, [isConnected])
 
   return (
-    <div className="flex h-[600px] w-[343px] flex-row flex-wrap  justify-center bg-[#FF89DE] text-black sm:h-[514px] sm:w-[588px]">
-      {/* <div className="flex h-fit w-full flex-row flex-wrap justify-start text-sm">
-        <div className="h-fit w-full">{ connectionStatus ? shortenAddress(userAddress) : 'no user connected'}</div>
-        {isCurationOwner && connectionStatus ? <div className="h-fit w-full">{'[OWNER]'}</div> : <div></div>}
-      </div> */}
+    <div className="flex h-[600px] w-[343px] flex-row flex-wrap  justify-center bg-[#FF89DE] text-black sm:min-h-[514px] sm:w-[588px]">
       <div className="flex flex-wrap content-start">
         <CurationHeader
-          connectionStatus={connectionStatus}
+          connectionStatus={isConnected}
           userAddress={userAddress}
           ownerStatus={isCurationOwner}
           addView={addTracksView}
@@ -117,7 +105,7 @@ export function CurationInterface({
           closeButton={closeButton}
         />
         <CurationAuthNav
-          connectionStatus={connectionStatus}
+          connectionStatus={isConnected}
           ownerStatus={isCurationOwner}
           holderStatus={isCurationPassHolder}
           addView={addTracksView}
@@ -130,9 +118,10 @@ export function CurationInterface({
           holderStatus={isCurationPassHolder}
           addView={addTracksView}
           addViewFn={setAddTracksView}
-          connectionStatus={connectionStatus}
+          connectionStatus={isConnected}
           curationContractAddress={curationContractAddress}
           userAddress={userAddress}
+          connectButton={connectButton}
         />
       </div>
     </div>

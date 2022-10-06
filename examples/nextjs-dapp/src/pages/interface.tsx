@@ -1,16 +1,13 @@
 import Link from "next/link"
 import { CurationInterface } from "@public-assembly/curation-interactions"
 import { useAccount } from 'wagmi'
-import { useState } from 'react'
+import { ConnectButton } from "@rainbow-me/rainbowkit"
 
 function Interface() {
 
-  const [isConnected, setIsConnected] = useState<boolean>(false)
-
-
   const hardcodedCurationContractAddress = "0xEd824d01B337Fb423554185464dbF7D85034446B"
 
-  const hardcodedNetwork = 4
+  const hardcodedNetwork = 5
 
   const { address } = useAccount()
 
@@ -27,19 +24,15 @@ function Interface() {
             </a>
         </Link>              
         <h1>Interface</h1>
-        <div className="flex flex-row flex-wrap justify-center">
+        <div className=" flex flex-row flex-wrap justify-center">
           <CurationInterface
-            connectionStatus={isConnected}
             userAddress={currentUserAddress}
             curationContractAddress={hardcodedCurationContractAddress}
             network={hardcodedNetwork}
+            connectButton={<ConnectButton />}
           />
-          <div className="mt-20 flex h-fit w-full flex-row flex-wrap justify-center">
-            <button
-              onClick={() => setIsConnected(!isConnected)}
-              className="bg-black p-2 text-white border-2">
-              {isConnected ? 'DISCONNECT' : 'CONNECT'}
-            </button>
+          <div className="w-full ">
+            padding
           </div>
         </div>
       </section>
