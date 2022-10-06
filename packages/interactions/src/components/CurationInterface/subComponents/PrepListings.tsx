@@ -1,43 +1,37 @@
 // @ts-nocheck
 import * as React from 'react'
 import { ListingInput } from './ListingInput'
-import { useState } from 'react'
 import { AddListings } from './AddListings'
 import { InputField } from './InputField'
+import { useAccount } from 'wagmi'
 
 export type PrepAddListingsProps = {
-  /**
-   * connectionStatus:
-   * curationContractAddress
-   */
   curationContractAddress: string
-  userAddress: string
-  // connectionStatus: boolean
-  // addView: boolean
-  // setListingsFn: Function
 }
 
 export function PrepListings({
   curationContractAddress,
   userAddress,
 }: PrepAddListingsProps) {
+  const { isConnected, address } = useAccount()
+
   const listingObject = Object.values({
     curatedAddress: '',
     selectedTokenId: 0,
-    curator: userAddress,
+    curator: address,
     curationTargetType: 1,
     sortOrder: 0,
     hasTokenId: false,
     chainId: 1,
   })
 
-  const [listingsToAdd, setListingsToAdd] = useState<array>([listingObject])
+  const [listingsToAdd, setListingsToAdd] = React.useState<array>([listingObject])
 
   const instantiateArray = () => {
     const newObject = Object.create(listingObject)
     newObject.curatedAddress = ''
     newObject.selectedTokenId = 0
-    newObject.curator = userAddress
+    newObject.curator = address
     newObject.curationTargetType = 1
     newObject.sortOrder = 0
     newObject.hasTokenId = false
@@ -67,7 +61,6 @@ export function PrepListings({
       ...newState[i],
       [0]: value,
     }
-
     setListingsToAdd(newState)
   }
 

@@ -1,4 +1,5 @@
-import { useContractRead, erc721ABI } from 'wagmi'
+import * as React from 'react'
+import { useContractRead, erc721ABI, useAccount } from 'wagmi'
 import { useState, useEffect } from 'react'
 import { BigNumber } from 'ethers'
 import { curatorAbi } from '../protocol/abi/curatorImpl'
@@ -11,20 +12,18 @@ export type CurationValidationProps = {
    * network: network for the zdk to query from (1 = mainnet, 5 = goerli)
    * zoraApiKey: optional zora api key to pass into zora zdk fetch of user curation tokens
    */
-  userAddress: string
   curationContractAddress: string
   network: number
   zoraApiKey?: string
 }
 
 export function useValidation({
-  userAddress,
   curationContractAddress,
   network,
   zoraApiKey,
 }: CurationValidationProps) {
   const [userActiveListings, setUserActiveListings] = useState<string[]>([''])
-
+  const { address } = useAccount()
   // ZDK Config
   const ZDK_ENDPOINT = 'https://api.zora.co/graphql'
 
@@ -55,21 +54,25 @@ export function useValidation({
   // function that fetches the activeListings (represented as tokens) for a user from the ZORA API
 
   async function getCurationNFTs() {
-    const zdkQueryArgs = {
-      where: {
-        collectionAddresses: [curationContractAddress],
-        ownerAddresses: [userAddress],
-      },
-      pagination: { limit: 200 },
-      includeFullDetails: false,
-    }
+    try {
+      const zdkQueryArgs = {
+        where: {
+          collectionAddresses: [curationContractAddress],
+          ownerAddresses: [address],
+        },
+        pagination: { limit: 200 },
+        includeFullDetails: false,
+      }
 
-    const userTokens: string[] = []
-    const resp = await zdk.tokens(zdkQueryArgs)
-    resp.tokens.nodes.map((token) => {
-      userTokens.push(token.token.tokenId)
-    })
-    setUserActiveListings(userTokens)
+      const userTokens: string[] = []
+      const resp = await zdk.tokens(zdkQueryArgs)
+      resp.tokens.nodes.map((token) => {
+        userTokens.push(token.token.tokenId)
+      })
+      setUserActiveListings(userTokens)
+    } catch (err) {
+      console.error(err)
+    }
   }
 
   const {
@@ -82,10 +85,12 @@ export function useValidation({
     functionName: 'curationPass',
   })
 
-  const curationPassAddress = curationPassData ? curationPassData.toString() : ''
+  const curationPassAddress = React.useMemo(
+    () => (curationPassData ? curationPassData.toString() : ''),
+    [curationPassData]
+  )
 
   // balanceOf call on curationPass contract
-
   const {
     data: balanceOfData,
     error: balanceOfError,
@@ -94,15 +99,15 @@ export function useValidation({
     addressOrName: curationPassAddress,
     contractInterface: erc721ABI,
     functionName: 'balanceOf',
-    args: [userAddress],
+    args: [address],
   })
 
-  const userCurationPassBalance = balanceOfData
-    ? Number(BigNumber.from(balanceOfData).toBigInt())
-    : 0
+  const userCurationPassBalance = React.useMemo(
+    () => (balanceOfData ? Number(BigNumber.from(balanceOfData).toBigInt()) : 0),
+    [balanceOfData]
+  )
 
   // curation contract owner read call
-
   const {
     data: ownerData,
     error: ownerError,
@@ -113,21 +118,26 @@ export function useValidation({
     functionName: 'owner',
   })
 
-  const curationOwnerAddress = ownerData ? ownerData.toString() : ''
+  const curationOwnerAddress = React.useMemo(
+    () => (ownerData ? ownerData.toString() : ''),
+    [ownerData]
+  )
 
   // check to see if current user is holds the curationPass
+  const isCurationPassHolder = React.useMemo(
+    () => (balanceOfData ? (userCurationPassBalance > 0 ? true : false) : false),
+    [balanceOfData, userCurationPassBalance]
+  )
 
-  const isCurationPassHolder = balanceOfData
-    ? userCurationPassBalance > 0
-      ? true
-      : false
-    : false
-
-  const isCurationOwner = ownerData
-    ? curationOwnerAddress.toLowerCase() === userAddress.toLowerCase()
-      ? true
-      : false
-    : false
+  const isCurationOwner = React.useMemo(
+    () =>
+      ownerData
+        ? curationOwnerAddress.toLowerCase() === address.toLowerCase()
+          ? true
+          : false
+        : false,
+    [ownerData, curationOwnerAddress, address]
+  )
 
   // curation limit read call
 
@@ -157,7 +167,10 @@ export function useValidation({
     functionName: 'frozenAt',
   })
 
-  const frozenAt = frozenAtData ? Number(BigNumber.from(frozenAtData).toBigInt()) : 0
+  const frozenAt = React.useMemo(
+    () => (frozenAtData ? Number(BigNumber.from(frozenAtData).toBigInt()) : 0),
+    [frozenAtData]
+  )
 
   // isPaused read call
 
@@ -171,13 +184,16 @@ export function useValidation({
     functionName: 'isPaused',
   })
 
-  const isPaused = isPausedData ? isPausedData : false
+  const isPaused = React.useMemo(
+    () => (isPausedData ? isPausedData : false),
+    [isPausedData]
+  )
 
   // fetches activeListings for user and sets it to state
 
   useEffect(() => {
-    getCurationNFTs()
-  }, [userAddress])
+    if (address) getCurationNFTs()
+  }, [address])
 
   return {
     // curationPass
