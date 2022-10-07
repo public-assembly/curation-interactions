@@ -5,15 +5,25 @@ import { useCurationFunctions } from '../../../hooks/useCurationFunctions'
 export type AddListingsProps = {
   curationContractAddress: string
   userAddress: string
-  bs: string | string[] | any[] | [string, number, boolean][] // Listing[] memory listings
+  listingsToAdd: string | string[] | any[] | [string, number, boolean][] // Listing[] memory listings
 }
 
 export function AddListings({
   userAddress,
   curationContractAddress,
-  bs,
+  listingsToAdd,
 }: AddListingsProps) {
-  const listings = Object.values(bs)
+  const objectToArray = (input) => {
+    const newArray = []
+    let copy = input
+    copy.map((object) => {
+      let midArray = Object.values(object)
+      newArray.push(midArray)
+    })
+    return newArray
+  }
+
+  const listings = objectToArray(listingsToAdd)
 
   const {
     addListingWrite,

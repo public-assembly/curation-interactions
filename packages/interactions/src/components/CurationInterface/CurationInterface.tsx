@@ -70,9 +70,9 @@ export function CurationInterface({
           addView={addTracksView}
           addViewFn={setAddTracksView}
           curationContractAddress={curationContractAddress}
+          connectButton={connectButton}
         />
       </div>
-      {connectButton}
     </div>
   )
 }
