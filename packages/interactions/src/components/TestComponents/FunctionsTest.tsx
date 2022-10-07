@@ -10,6 +10,7 @@ export type CurationFunctionsProps = {
    * freezeAtUnix: unix time to freeze curation functionality (including owner) forever
    * newRendererAddress: address of new metadata renderer
    * newRendererInitializer: new metadata path. bytes 0 value for default
+   * newPause: sets new pause state boolean -- cannot pass in value of the current pause state
    * newCurationPass: address of new curation pass
    * newSortOrderIds: tokenIds to adjust sort order for
    * newSortOrderOrders: new sort order for tokenIds specified
@@ -22,6 +23,7 @@ export type CurationFunctionsProps = {
   freezeAtUnix?: number // uint256 timestamp
   newRendererAddress?: string // address _newRenderer
   newRendererInitializer?: string // bytes memory _rendererInitializer
+  newPause?: boolean // bool _setPaused
   newCurationPass?: string // IERC721Upgradeable _curationPass
   newSortOrderIds?: number[] // uint256[] calldata tokenIds
   newSortOrderOrders?: number[] // int32[] calldata sortOrders
@@ -36,6 +38,7 @@ export function FunctionsTest({
   freezeAtUnix,
   newRendererAddress,
   newRendererInitializer,
+  newPause,
   newCurationPass,
   newSortOrderIds,
   newSortOrderOrders,
@@ -120,23 +123,14 @@ export function FunctionsTest({
     // txnUpdateSortOrderData,
     // txnUpdateSortOrderStatus,
 
-    // pauseCuration
-    // pauseCurationConfig,
-    // pauseCurationConfigError,
-    pauseCurationWrite,
-    // pauseCurationWriteData,
-    // pauseCurationWriteError,
-    // txnPauseCurationData,
-    // txnPauseCurationStatus,
-
-    // resumeCuration
-    // resumeCurationConfig,
-    // resumeCurationConfigError,
-    resumeCurationWrite,
-    // resumeCurationWriteData,
-    // resumeCurationWriteError,
-    // txnResumeCurationData,
-    // txnResumeCurationStatus,
+    // setCurationPause
+    // setCurationPauseConfig,
+    // setCurationPauseConfigError,
+    setCurationPauseWrite,
+    // setCurationPauseWriteData,
+    // setCurationPauseWriteError,
+    // txnSetCurationPauseData,
+    // txnSetCurationPauseStatus
   } = useCurationFunctions({
     curationContractAddress,
     listings,
@@ -144,6 +138,7 @@ export function FunctionsTest({
     freezeAtUnix,
     newRendererAddress,
     newRendererInitializer,
+    newPause,
     newCurationPass,
     newSortOrderIds,
     newSortOrderOrders,
@@ -197,18 +192,13 @@ export function FunctionsTest({
       </button>
       <button
         className="w-3/12 border-2 border-solid border-black hover:bg-black hover:text-white"
-        onClick={() => resumeCurationWrite?.()}>
-        Resume Curation
-      </button>
-      <button
-        className="w-3/12 border-2 border-solid border-black hover:bg-black hover:text-white"
-        onClick={() => pauseCurationWrite?.()}>
-        Pause Curation
+        onClick={() => setCurationPauseWrite?.()}>
+        Flip Curation Pause State
       </button>
       <button
         className="w-3/12 border-2 border-solid border-black hover:bg-black hover:text-white"
         onClick={() => updateCurationLimitWrite?.()}>
-        Update Curation
+        Update Curation Limi
       </button>
 
       <div>{'getListings read call results : ' + JSON.stringify(getListingsRead)}</div>

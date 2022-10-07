@@ -1,8 +1,22 @@
 import Link from "next/link"
-
+import { useValidation } from "@public-assembly/curation-interactions"
 import { FunctionsTest } from "@public-assembly/curation-interactions"
 
-const hardcodedCuratorAddress = "0xEd824d01B337Fb423554185464dbF7D85034446B"
+export type CurationValidationProps = {
+  /**
+   * userAddress: send in wallet address to check nft balance of
+   * curationContractAddress: address of curation contract being queried
+   * network: network for the zdk to query from (1 = mainnet, 5 = goerli)
+   * zoraApiKey: optional zora api key to pass into zora zdk fetch of user curation tokens
+   */
+  curationContractAddress: string
+  network: number
+  zoraApiKey?: string
+}
+
+const curationContractAddress = "0xEd824d01B337Fb423554185464dbF7D85034446B"
+
+const network = 5;
 
 const listing1 = [
   "0x3795102c8508e0912b937ee263904d488407abba",
@@ -49,6 +63,13 @@ const burnBatchTokenIds = [0,1]
 
 function Functions() {
 
+  const { isPaused } = useValidation({
+    curationContractAddress,
+    network
+  })
+
+  const isPausedNew = Boolean(!isPaused)
+
     return (
       <section className="flex flex-col gap-4">
         <Link
@@ -63,12 +84,13 @@ function Functions() {
           {JSON.stringify(arrayOfArrays)}
         </div>
         <FunctionsTest 
-        curationContractAddress={hardcodedCuratorAddress}
+        curationContractAddress={curationContractAddress}
         listings={arrayOfArrays}
         curationLimit={newCurationLimit}
         freezeAtUnix={newFreezeAt}
         newRendererAddress={newRendererAddress}
         newRendererInitializer={newRendererInitializer}
+        newPause={isPausedNew}
         newCurationPass={newCurationPassAddress}
         newSortOrderIds={newSortOrderIds}
         newSortOrderOrders={newSortOrderOrders}
