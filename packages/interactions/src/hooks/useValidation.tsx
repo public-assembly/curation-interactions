@@ -2,7 +2,8 @@ import * as React from 'react'
 import { useContractRead, erc721ABI, useAccount } from 'wagmi'
 import { useState, useEffect } from 'react'
 import { BigNumber } from 'ethers'
-import { abi } from '@public-assembly/curation-protocol/dist/artifacts/out/Curator.sol/Curator.json'
+// import { abi } from '@public-assembly/curation-protocol/dist/artifacts/out/Curator.sol/Curator.json'
+import { curatorAbi } from '../protocol/abi/curatorImpl'
 import { ZDK, ZDKChain, ZDKNetwork } from '@zoralabs/zdk'
 
 export type CurationValidationProps = {
@@ -81,7 +82,7 @@ export function useValidation({
     isLoading: curationPassLoading,
   } = useContractRead({
     addressOrName: curationContractAddress,
-    contractInterface: abi,
+    contractInterface: curatorAbi,
     functionName: 'curationPass',
     enabled: isConnected,
   })
@@ -116,7 +117,7 @@ export function useValidation({
     isLoading: ownerLoading,
   } = useContractRead({
     addressOrName: curationContractAddress,
-    contractInterface: abi,
+    contractInterface: curatorAbi,
     functionName: 'owner',
     enabled: isConnected,
   })
@@ -152,7 +153,7 @@ export function useValidation({
     isLoading: curationLimitLoading,
   } = useContractRead({
     addressOrName: curationContractAddress,
-    contractInterface: abi,
+    contractInterface: curatorAbi,
     functionName: 'curationLimit',
     enabled: isConnected,
   })
@@ -169,7 +170,7 @@ export function useValidation({
     isLoading: frozenAtLoading,
   } = useContractRead({
     addressOrName: curationContractAddress,
-    contractInterface: abi,
+    contractInterface: curatorAbi,
     functionName: 'frozenAt',
     enabled: isConnected,
   })
@@ -187,7 +188,7 @@ export function useValidation({
     isLoading: isPausedLoading,
   } = useContractRead({
     addressOrName: curationContractAddress,
-    contractInterface: abi,
+    contractInterface: curatorAbi,
     functionName: 'isPaused',
     enabled: isConnected,
   })

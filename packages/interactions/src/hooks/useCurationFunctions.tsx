@@ -6,7 +6,8 @@ import {
   useContractWrite,
   useWaitForTransaction,
 } from 'wagmi'
-import { abi } from '@public-assembly/curation-protocol/dist/artifacts/out/Curator.sol/Curator.json'
+// import { abi } from '@public-assembly/curation-protocol/dist/artifacts/out/Curator.sol/Curator.json'
+import { curatorAbi } from '../protocol/abi/curatorImpl'
 
 export type CurationFunctionsProps = {
   /**
@@ -58,7 +59,7 @@ export function useCurationFunctions({
     isLoading: getListingsLoading,
   } = useContractRead({
     addressOrName: curationContractAddress,
-    contractInterface: abi,
+    contractInterface: curatorAbi,
     functionName: 'getListings',
   })
 
@@ -66,7 +67,7 @@ export function useCurationFunctions({
   const { config: addListingConfig, error: addListingConfigError } =
     usePrepareContractWrite({
       addressOrName: curationContractAddress,
-      contractInterface: abi,
+      contractInterface: curatorcuratorAbi,
       functionName: 'addListings',
       args: [listings],
       enabled: listings,
@@ -85,7 +86,7 @@ export function useCurationFunctions({
   // burn
   const { config: burnConfig, error: burnConfigError } = usePrepareContractWrite({
     addressOrName: curationContractAddress,
-    contractInterface: abi,
+    contractInterface: curatorcuratorAbi,
     functionName: 'burn',
     args: [listingToBurn],
     enabled: listingToBurn,
@@ -105,7 +106,7 @@ export function useCurationFunctions({
   const { config: burnBatchConfig, error: burnBatchConfigError } =
     usePrepareContractWrite({
       addressOrName: curationContractAddress,
-      contractInterface: abi,
+      contractInterface: curatorAbi,
       functionName: 'burnBatch',
       args: [listingsToBurn],
       enabled: listingsToBurn,
@@ -125,7 +126,7 @@ export function useCurationFunctions({
   const { config: updateCurationLimitConfig, error: updateCurationLimitConfigError } =
     usePrepareContractWrite({
       addressOrName: curationContractAddress,
-      contractInterface: abi,
+      contractInterface: curatorAbi,
       functionName: 'updateCurationLimit',
       args: [curationLimit],
       enabled: curationLimit,
@@ -145,7 +146,7 @@ export function useCurationFunctions({
   // freezeAt
   const { config: freezeAtConfig, error: freezeAtConfigError } = usePrepareContractWrite({
     addressOrName: curationContractAddress,
-    contractInterface: abi,
+    contractInterface: curatorAbi,
     functionName: 'freezeAt',
     args: [freezeAtUnix],
     enabled: freezeAtUnix,
@@ -165,10 +166,10 @@ export function useCurationFunctions({
   const { config: updateRendererConfig, error: updateRendererConfigError } =
     usePrepareContractWrite({
       addressOrName: curationContractAddress,
-      contractInterface: abi,
+      contractInterface: curatorAbi,
       functionName: 'updateRenderer',
       args: [newRendererAddress, newRendererInitializer],
-      enabled: abi,
+      enabled: curatorAbi,
     })
 
   const {
@@ -186,7 +187,7 @@ export function useCurationFunctions({
   const { config: updateCurationPassConfig, error: updateCurationPassConfigError } =
     usePrepareContractWrite({
       addressOrName: curationContractAddress,
-      contractInterface: abi,
+      contractInterface: curatorAbi,
       functionName: 'updateCurationPass',
       args: [newCurationPass],
       enabled: newCurationPass,
@@ -207,7 +208,7 @@ export function useCurationFunctions({
   const { config: updateSortOrderConfig, error: updateSortOrderConfigError } =
     usePrepareContractWrite({
       addressOrName: curationContractAddress,
-      contractInterface: abi,
+      contractInterface: curatorAbi,
       functionName: 'updateSortOrders',
       args: [newSortOrderIds, newSortOrderOrders],
       enabled: newSortOrderIds && newSortOrderOrders,
@@ -228,7 +229,7 @@ export function useCurationFunctions({
   const { config: setCurationPauseConfig, error: setCurationPauseConfigError } =
     usePrepareContractWrite({
       addressOrName: curationContractAddress,
-      contractInterface: abi,
+      contractInterface: curatorAbi,
       functionName: 'setCurationPause',
       args: [newPause],
       enabled: newPause,
