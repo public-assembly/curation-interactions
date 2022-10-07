@@ -1,6 +1,6 @@
 {
   "name": "@public-assembly/curation-interactions",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "hooks + components for interacting with the PA curation protocol",
   "main": "dist/public-assembly-curation-interactions.cjs.js",
   "author": "Max Bochman",
