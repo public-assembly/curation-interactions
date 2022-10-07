@@ -1,5 +1,5 @@
 import { usePrepareContractWrite, useContractWrite, useWaitForTransaction } from 'wagmi'
-import { abi } from '@public-assembly/curation-protocol/dist/artifacts/out/CuratorFactory.sol/CuratorFactory.json'
+import { factoryAbi } from '../protocol/abi/factoryImpl'
 
 export type CuratorFactoryProps = {
   /**
@@ -41,7 +41,7 @@ export type CuratorFactoryProps = {
   /**
    * Initial NFT(s) that will be curated on deployment
    */
-  initialListings: (string | number | boolean)[][] | []
+  initialListings: (string | number | boolean)[][] | string[]
 }
 
 export function useCurationFactory({
@@ -58,7 +58,7 @@ export function useCurationFactory({
 }: CuratorFactoryProps) {
   const { config: deployConfig, error: deployConfigError } = usePrepareContractWrite({
     addressOrName: curatorFactoryAddress,
-    contractInterface: abi,
+    contractInterface: factoryAbi,
     functionName: 'deploy',
     args: [
       curationManagerAddress,
