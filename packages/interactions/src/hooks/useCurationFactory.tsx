@@ -41,7 +41,7 @@ export type CuratorFactoryProps = {
   /**
    * Initial NFT(s) that will be curated on deployment
    */
-  initialListings: (string | number | boolean)[][]
+  initialListings: (string | number | boolean)[][] | string[]
 }
 
 export function useCurationFactory({
