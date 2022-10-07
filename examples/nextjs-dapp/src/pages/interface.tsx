@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { CurationInterface } from "@public-assembly/curation-interactions"
+import { ConnectButton } from "@rainbow-me/rainbowkit"
 
 function Interface() {
   const hardcodedCurationContractAddress = "0xEd824d01B337Fb423554185464dbF7D85034446B"
@@ -17,6 +18,7 @@ function Interface() {
         <CurationInterface
           curationContractAddress={hardcodedCurationContractAddress}
           network={hardcodedNetwork}
+          connectButton={<ConnectButton />}
         />
       </div>
     </section>

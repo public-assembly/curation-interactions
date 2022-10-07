@@ -27,10 +27,10 @@ export function CurationBody({
       {!addView ? (
         <div className=" mb-[24px] h-fit w-full flex-row flex-wrap justify-center text-sm ">
           {holderStatus || ownerStatus ? (
-            <div className="flex h-[80px] w-full flex-row flex-wrap justify-center border-b-2 border-gray-700">
+            <div className="flex h-[80px] w-full flex-row flex-wrap justify-center">
               <button
                 onClick={() => addViewFn(true)}
-                className="w-full bg-[#050A09] p-2 text-[18px] text-[#ECF1F0]">
+                className="mx-[24px] w-full border-b-2 border-gray-700 bg-[#050A09] p-2 text-[18px] text-[#ECF1F0]">
                 Add tracks
               </button>
             </div>
@@ -41,16 +41,16 @@ export function CurationBody({
                   <div className=" mt-1 flex h-[14px] w-[14px]  flex-row items-start justify-center self-start bg-black text-transparent">
                     {'✕'}
                   </div>
-                  <div className=" flex h-fit w-full flex-row justify-start self-center">
+                  <div className=" mx-[24px] flex h-fit w-full flex-row justify-start self-center">
                     YOU MUST POSSES A CURATION PASS FOR THIS PLATFORM TO ACCESS
                     FUNCTIONALITY
                   </div>
                 </div>
               </div>
-              <div className=" flex h-[80px] w-full flex-row flex-wrap justify-center border-b-2 border-gray-700 opacity-50">
+              <div className=" flex h-[80px] w-full flex-row flex-wrap justify-center  opacity-50">
                 <button
                   disabled={true}
-                  className="w-full bg-[#050A09] p-2 text-[16px] text-[#ECF1F0]">
+                  className="mx-[24px] w-full border-b-2  border-gray-700 bg-[#050A09] p-2 text-[16px] text-[#ECF1F0]">
                   Add tracks
                 </button>
               </div>
@@ -60,15 +60,15 @@ export function CurationBody({
           <div className=" flex h-[80px] w-full flex-row flex-wrap justify-center">
             <button
               disabled={true}
-              className=" w-full bg-[#050A09] p-2 text-[16px] text-[#ECF1F0] opacity-50">
+              className=" mx-[24px] w-full bg-[#050A09] p-2 text-[16px] text-[#ECF1F0] opacity-50">
               Remove tracks (coming soon)
             </button>
           </div>
           {ownerStatus ? (
-            <div className="flex h-[80px] w-full flex-row flex-wrap justify-center border-t-2 border-gray-700 border-opacity-50">
+            <div className="flex h-[80px] w-full flex-row flex-wrap justify-center border-opacity-50">
               <button
                 disabled={true}
-                className=" w-full bg-[#050A09] p-2 text-[16px] text-[#ECF1F0] opacity-50">
+                className=" mx-[24px] w-full border-t-2 border-gray-700 bg-[#050A09] p-2 text-[16px] text-[#ECF1F0] opacity-50">
                 Manage contract (coming soon)
               </button>
             </div>

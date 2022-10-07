@@ -6,10 +6,7 @@ import {
   useContractWrite,
   useWaitForTransaction,
 } from 'wagmi'
-import { BigNumber } from 'ethers'
-import { curatorAbi } from '../protocol/abi/curatorImpl'
-
-import * as blah from '@public-assembly/curation-protocol/dist/artifacts/out/Curator.sol/Curator.json'
+import { abi } from '@public-assembly/curation-protocol/dist/artifacts/out/Curator.sol/Curator.json'
 
 export type CurationFunctionsProps = {
   /**
@@ -19,6 +16,7 @@ export type CurationFunctionsProps = {
    * freezeAtUnix: unix time to freeze curation functionality (including owner) forever
    * newRendererAddress: address of new metadata renderer
    * newRendererInitializer: new metadata path. bytes 0 value for default
+   * newPause: sets new pause state boolean -- cannot pass in value of the current pause state
    * newCurationPass: address of new curation pass
    * newSortOrderIds: tokenIds to adjust sort order for
    * newSortOrderOrders: new sort order for tokenIds specified
@@ -31,6 +29,7 @@ export type CurationFunctionsProps = {
   freezeAtUnix?: number // uint256 timestamp
   newRendererAddress?: string // address _newRenderer
   newRendererInitializer?: string // bytes memory _rendererInitializer
+  newPause?: boolean // bool _setPaused
   newCurationPass?: string // IERC721Upgradeable _curationPass
   newSortOrderIds?: number[] // uint256[] calldata tokenIds
   newSortOrderOrders?: number[] // int32[] calldata sortOrders
@@ -45,6 +44,7 @@ export function useCurationFunctions({
   freezeAtUnix,
   newRendererAddress,
   newRendererInitializer,
+  newPause,
   newCurationPass,
   newSortOrderIds,
   newSortOrderOrders,
@@ -58,36 +58,18 @@ export function useCurationFunctions({
     isLoading: getListingsLoading,
   } = useContractRead({
     addressOrName: curationContractAddress,
-    contractInterface: curatorAbi,
+    contractInterface: abi,
     functionName: 'getListings',
   })
-
-  // TO DO - add data cleaning of getListings call to remove BigNumbers
-
-  // const cleanedListing = (
-  //   getListingsReturn: string | string[] | any[] | [string, number, boolean][]
-  // ) => {
-  //   console.log("getListingsReturned", getListingsReturn)
-  //   const inputArray = [...getListingsReturn]
-  //   const workingArray = [...inputArray]
-  //   workingArray.map((listing) => {
-  //     console.log("waht is listing : ", listing[1])
-  //     let BigNumbered = Number(BigNumber.from(listing[1]).toBigInt())
-  //     listing[1] = BigNumbered
-  //   });
-  //   console.log("workingArray")
-  //   return workingArray
-  // }
-
-  // const getListingsCleaned = getListingsRead ? cleanedListing(getListingsRead) : ""
 
   // addListings
   const { config: addListingConfig, error: addListingConfigError } =
     usePrepareContractWrite({
       addressOrName: curationContractAddress,
-      contractInterface: blah.abi,
+      contractInterface: abi,
       functionName: 'addListings',
       args: [listings],
+      enabled: listings,
     })
 
   const {
@@ -103,9 +85,10 @@ export function useCurationFunctions({
   // burn
   const { config: burnConfig, error: burnConfigError } = usePrepareContractWrite({
     addressOrName: curationContractAddress,
-    contractInterface: curatorAbi,
+    contractInterface: abi,
     functionName: 'burn',
     args: [listingToBurn],
+    enabled: listingToBurn,
   })
 
   const {
@@ -122,9 +105,10 @@ export function useCurationFunctions({
   const { config: burnBatchConfig, error: burnBatchConfigError } =
     usePrepareContractWrite({
       addressOrName: curationContractAddress,
-      contractInterface: curatorAbi,
+      contractInterface: abi,
       functionName: 'burnBatch',
       args: [listingsToBurn],
+      enabled: listingsToBurn,
     })
 
   const {
@@ -141,9 +125,10 @@ export function useCurationFunctions({
   const { config: updateCurationLimitConfig, error: updateCurationLimitConfigError } =
     usePrepareContractWrite({
       addressOrName: curationContractAddress,
-      contractInterface: curatorAbi,
+      contractInterface: abi,
       functionName: 'updateCurationLimit',
       args: [curationLimit],
+      enabled: curationLimit,
     })
 
   const {
@@ -160,9 +145,10 @@ export function useCurationFunctions({
   // freezeAt
   const { config: freezeAtConfig, error: freezeAtConfigError } = usePrepareContractWrite({
     addressOrName: curationContractAddress,
-    contractInterface: curatorAbi,
+    contractInterface: abi,
     functionName: 'freezeAt',
     args: [freezeAtUnix],
+    enabled: freezeAtUnix,
   })
 
   const {
@@ -179,9 +165,10 @@ export function useCurationFunctions({
   const { config: updateRendererConfig, error: updateRendererConfigError } =
     usePrepareContractWrite({
       addressOrName: curationContractAddress,
-      contractInterface: curatorAbi,
+      contractInterface: abi,
       functionName: 'updateRenderer',
       args: [newRendererAddress, newRendererInitializer],
+      enabled: abi,
     })
 
   const {
@@ -199,9 +186,10 @@ export function useCurationFunctions({
   const { config: updateCurationPassConfig, error: updateCurationPassConfigError } =
     usePrepareContractWrite({
       addressOrName: curationContractAddress,
-      contractInterface: curatorAbi,
+      contractInterface: abi,
       functionName: 'updateCurationPass',
       args: [newCurationPass],
+      enabled: newCurationPass,
     })
 
   const {
@@ -219,9 +207,10 @@ export function useCurationFunctions({
   const { config: updateSortOrderConfig, error: updateSortOrderConfigError } =
     usePrepareContractWrite({
       addressOrName: curationContractAddress,
-      contractInterface: curatorAbi,
+      contractInterface: abi,
       functionName: 'updateSortOrders',
       args: [newSortOrderIds, newSortOrderOrders],
+      enabled: newSortOrderIds && newSortOrderOrders,
     })
 
   const {
@@ -235,42 +224,25 @@ export function useCurationFunctions({
       hash: updateSortOrderWriteData?.hash,
     })
 
-  // pauseCuration
-  const { config: pauseCurationConfig, error: pauseCurationConfigError } =
+  // setCurationPause
+  const { config: setCurationPauseConfig, error: setCurationPauseConfigError } =
     usePrepareContractWrite({
       addressOrName: curationContractAddress,
-      contractInterface: curatorAbi,
-      functionName: 'pauseCuration',
+      contractInterface: abi,
+      functionName: 'setCurationPause',
+      args: [newPause],
+      enabled: newPause,
     })
 
   const {
-    write: pauseCurationWrite,
-    data: pauseCurationWriteData,
-    error: pauseCurationWriteError,
-  } = useContractWrite(pauseCurationConfig)
+    write: setCurationPauseWrite,
+    data: setCurationPauseWriteData,
+    error: setCurationPauseWriteError,
+  } = useContractWrite(setCurationPauseConfig)
 
-  const { data: txnPauseCurationData, status: txnPauseCurationStatus } =
+  const { data: txnSetCurationPauseData, status: txnSetCurationPauseStatus } =
     useWaitForTransaction({
-      hash: pauseCurationWriteData?.hash,
-    })
-
-  // resumeCuration
-  const { config: resumeCurationConfig, error: resumeCurationConfigError } =
-    usePrepareContractWrite({
-      addressOrName: curationContractAddress,
-      contractInterface: curatorAbi,
-      functionName: 'resumeCuration',
-    })
-
-  const {
-    write: resumeCurationWrite,
-    data: resumeCurationWriteData,
-    error: resumeCurationWriteError,
-  } = useContractWrite(resumeCurationConfig)
-
-  const { data: txnResumeCurationData, status: txnResumeCurationStatus } =
-    useWaitForTransaction({
-      hash: resumeCurationWriteData?.hash,
+      hash: setCurationPauseWriteData?.hash,
     })
 
   return {
@@ -351,22 +323,13 @@ export function useCurationFunctions({
     txnUpdateSortOrderData,
     txnUpdateSortOrderStatus,
 
-    // pauseCuration
-    pauseCurationConfig,
-    pauseCurationConfigError,
-    pauseCurationWrite,
-    pauseCurationWriteData,
-    pauseCurationWriteError,
-    txnPauseCurationData,
-    txnPauseCurationStatus,
-
-    // resumeCuration
-    resumeCurationConfig,
-    resumeCurationConfigError,
-    resumeCurationWrite,
-    resumeCurationWriteData,
-    resumeCurationWriteError,
-    txnResumeCurationData,
-    txnResumeCurationStatus,
+    // setCurationPause
+    setCurationPauseConfig,
+    setCurationPauseConfigError,
+    setCurationPauseWrite,
+    setCurationPauseWriteData,
+    setCurationPauseWriteError,
+    txnSetCurationPauseData,
+    txnSetCurationPauseStatus,
   }
 }

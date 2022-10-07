@@ -2,7 +2,7 @@ import * as React from 'react'
 import { useContractRead, erc721ABI, useAccount } from 'wagmi'
 import { useState, useEffect } from 'react'
 import { BigNumber } from 'ethers'
-import { curatorAbi } from '../protocol/abi/curatorImpl'
+import { abi } from '@public-assembly/curation-protocol/dist/artifacts/out/Curator.sol/Curator.json'
 import { ZDK, ZDKChain, ZDKNetwork } from '@zoralabs/zdk'
 
 export type CurationValidationProps = {
@@ -23,7 +23,7 @@ export function useValidation({
   zoraApiKey,
 }: CurationValidationProps) {
   const [userActiveListings, setUserActiveListings] = useState<string[]>([''])
-  const { address } = useAccount()
+  const { address, isConnected } = useAccount()
   // ZDK Config
   const ZDK_ENDPOINT = 'https://api.zora.co/graphql'
 
@@ -81,8 +81,9 @@ export function useValidation({
     isLoading: curationPassLoading,
   } = useContractRead({
     addressOrName: curationContractAddress,
-    contractInterface: curatorAbi,
+    contractInterface: abi,
     functionName: 'curationPass',
+    enabled: isConnected,
   })
 
   const curationPassAddress = React.useMemo(
@@ -100,6 +101,7 @@ export function useValidation({
     contractInterface: erc721ABI,
     functionName: 'balanceOf',
     args: [address],
+    enabled: isConnected,
   })
 
   const userCurationPassBalance = React.useMemo(
@@ -114,8 +116,9 @@ export function useValidation({
     isLoading: ownerLoading,
   } = useContractRead({
     addressOrName: curationContractAddress,
-    contractInterface: curatorAbi,
+    contractInterface: abi,
     functionName: 'owner',
+    enabled: isConnected,
   })
 
   const curationOwnerAddress = React.useMemo(
@@ -149,8 +152,9 @@ export function useValidation({
     isLoading: curationLimitLoading,
   } = useContractRead({
     addressOrName: curationContractAddress,
-    contractInterface: curatorAbi,
+    contractInterface: abi,
     functionName: 'curationLimit',
+    enabled: isConnected,
   })
 
   const curationLimit = curationLimitData
@@ -165,8 +169,9 @@ export function useValidation({
     isLoading: frozenAtLoading,
   } = useContractRead({
     addressOrName: curationContractAddress,
-    contractInterface: curatorAbi,
+    contractInterface: abi,
     functionName: 'frozenAt',
+    enabled: isConnected,
   })
 
   const frozenAt = React.useMemo(
@@ -182,8 +187,9 @@ export function useValidation({
     isLoading: isPausedLoading,
   } = useContractRead({
     addressOrName: curationContractAddress,
-    contractInterface: curatorAbi,
+    contractInterface: abi,
     functionName: 'isPaused',
+    enabled: isConnected,
   })
 
   const isPaused = React.useMemo(
