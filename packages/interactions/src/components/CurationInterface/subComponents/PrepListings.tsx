@@ -98,7 +98,7 @@ export function PrepListings({
             </div>
           )
         })}
-        {listingsToAdd.length < 5 ? (
+        {listingsToAdd.length < 10 ? (
           <div className=" py-2 text-xs ">
             <button
               onClick={() => {
