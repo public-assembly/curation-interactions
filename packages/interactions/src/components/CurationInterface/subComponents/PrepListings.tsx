@@ -61,6 +61,8 @@ export function PrepListings({
       ...newState[i],
       [0]: value,
     }
+    // console.log("")
+    // const arrayifiedNewStated = Object.values(newState[i])
     setListingsToAdd(newState)
   }
 
@@ -114,7 +116,7 @@ export function PrepListings({
       <div className="flex w-full flex-row content-end">
         <AddListings
           userAddress={userAddress}
-          bs={setListingsToAdd}
+          listingsToAdd={listingsToAdd}
           curationContractAddress={curationContractAddress}
         />
       </div>

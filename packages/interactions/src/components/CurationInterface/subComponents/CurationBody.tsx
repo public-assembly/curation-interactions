@@ -9,6 +9,7 @@ export type CurationFooterProps = {
   addView: boolean
   addViewFn: Function
   curationContractAddress: string
+  connectButton: JSX.Element
 }
 
 export function CurationBody({
@@ -17,10 +18,28 @@ export function CurationBody({
   addView,
   addViewFn,
   curationContractAddress,
+  connectButton,
 }: CurationFooterProps) {
   const { isConnected } = useAccount()
 
-  if (!isConnected) return null
+  if (!isConnected)
+    return (
+      <div className="mx-[24px] mb-[24px] flex w-full flex-row flex-wrap  justify-center space-y-[24px]">
+        <div className="h-fit w-full flex-row flex-wrap justify-center text-sm ">
+          <div className="item-end flex h-[80px] w-full flex-row flex-wrap justify-center border">
+            {connectButton}
+          </div>
+        </div>
+
+        <div className="h-fit w-full flex-row flex-wrap justify-center text-sm ">
+          <div className=" flex flex-row justify-center">
+            {'Dont have a wallet? click '}
+            <a className=" px-1 font-bold"> {'here'} </a>
+            {' to get one '}
+          </div>
+        </div>
+      </div>
+    )
 
   return (
     <div className=" h-fit w-full ">

@@ -67,7 +67,7 @@ export function useCurationFunctions({
   const { config: addListingConfig, error: addListingConfigError } =
     usePrepareContractWrite({
       addressOrName: curationContractAddress,
-      contractInterface: curatorcuratorAbi,
+      contractInterface: curatorAbi,
       functionName: 'addListings',
       args: [listings],
       enabled: listings,
@@ -86,7 +86,7 @@ export function useCurationFunctions({
   // burn
   const { config: burnConfig, error: burnConfigError } = usePrepareContractWrite({
     addressOrName: curationContractAddress,
-    contractInterface: curatorcuratorAbi,
+    contractInterface: curatorAbi,
     functionName: 'burn',
     args: [listingToBurn],
     enabled: listingToBurn,
