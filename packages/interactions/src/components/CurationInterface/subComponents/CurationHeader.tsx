@@ -1,6 +1,6 @@
 /* @ts-ignore */
 import * as React from 'react'
-import { shortenAddress } from '../utils/shortenAddress'
+import { shortenAddress } from '../../../lib'
 import { useAccount } from 'wagmi'
 
 export type HeaderProps = {

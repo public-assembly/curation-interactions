@@ -226,6 +226,7 @@ export function useCurationFunctions({
     })
 
   // setCurationPause
+  /*
   const { config: setCurationPauseConfig, error: setCurationPauseConfigError } =
     usePrepareContractWrite({
       addressOrName: curationContractAddress,
@@ -241,10 +242,12 @@ export function useCurationFunctions({
     error: setCurationPauseWriteError,
   } = useContractWrite(setCurationPauseConfig)
 
+  
   const { data: txnSetCurationPauseData, status: txnSetCurationPauseStatus } =
     useWaitForTransaction({
       hash: setCurationPauseWriteData?.hash,
     })
+  */
 
   return {
     // getListings
@@ -325,6 +328,7 @@ export function useCurationFunctions({
     txnUpdateSortOrderStatus,
 
     // setCurationPause
+    /*
     setCurationPauseConfig,
     setCurationPauseConfigError,
     setCurationPauseWrite,
@@ -332,5 +336,6 @@ export function useCurationFunctions({
     setCurationPauseWriteError,
     txnSetCurationPauseData,
     txnSetCurationPauseStatus,
+    */
   }
 }

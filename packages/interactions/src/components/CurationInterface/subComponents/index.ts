@@ -1,4 +1,4 @@
-export * from './AddListings'
+export * from './AddListingsRefactor'
 export * from './ConnnectPrompt'
 export * from './CurationAuthNav'
 export * from './CurationBody'
