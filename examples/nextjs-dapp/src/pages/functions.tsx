@@ -14,7 +14,7 @@ export type CurationValidationProps = {
   zoraApiKey?: string
 }
 
-const curationContractAddress = "0xEd824d01B337Fb423554185464dbF7D85034446B"
+const curationContractAddress = "0x9364E704f02a7CC69FE207cfD7FB03737642F0f8"
 
 const network = 5;
 
@@ -22,7 +22,7 @@ const listing1 = [
   "0x3795102c8508e0912b937ee263904d488407abba",
   1,
   "0x806164c929Ad3A6f4bd70c2370b3Ef36c64dEaa8",
-  4,
+  6,
   0,
   true,
   1   

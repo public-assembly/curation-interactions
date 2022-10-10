@@ -225,12 +225,13 @@ export function useCurationFunctions({
       hash: updateSortOrderWriteData?.hash,
     })
 
-  // setCurationPause
+  // setCurationPaused
+
   const { config: setCurationPauseConfig, error: setCurationPauseConfigError } =
     usePrepareContractWrite({
       addressOrName: curationContractAddress,
       contractInterface: curatorAbi,
-      functionName: 'setCurationPause',
+      functionName: 'setCurationPaused',
       args: [newPause],
       enabled: newPause,
     })

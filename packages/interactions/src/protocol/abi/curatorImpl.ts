@@ -749,19 +749,6 @@ export const curatorAbi = [
     type: 'function',
   },
   {
-    inputs: [
-      {
-        internalType: 'uint256[]',
-        name: 'listingIds',
-        type: 'uint256[]',
-      },
-    ],
-    name: 'burnBatch',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
     inputs: [],
     name: 'cancelOwnershipTransfer',
     outputs: [],
@@ -1248,6 +1235,19 @@ export const curatorAbi = [
       },
     ],
     stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'uint256[]',
+        name: 'listingIds',
+        type: 'uint256[]',
+      },
+    ],
+    name: 'removeListings',
+    outputs: [],
+    stateMutability: 'nonpayable',
     type: 'function',
   },
   {
