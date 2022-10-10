@@ -1,7 +1,7 @@
 # Public Assembly Curation Protocol Interactions
 Library of React hooks, and utility fuctions to interact with to [Public Assembly's](https://www.public---assembly.com/) [Curation Protocol](https://github.com/public-assembly/curation-protocol).
 
-## Hooks:
+## Hook:
 - useValidation
 - useCurationFunctions
 - useCurationFactory
