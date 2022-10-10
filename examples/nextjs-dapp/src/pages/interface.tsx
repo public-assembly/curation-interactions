@@ -3,7 +3,7 @@ import { CurationInterface } from "@public-assembly/curation-interactions"
 import { ConnectButton } from "../components/ConnectButton"
 
 function Interface() {
-  const hardcodedCurationContractAddress = "0xEd824d01B337Fb423554185464dbF7D85034446B"
+  const hardcodedCurationContractAddress = "0x9364E704f02a7CC69FE207cfD7FB03737642F0f8"
   const hardcodedNetwork = 5
   
   return (

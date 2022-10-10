@@ -14,7 +14,7 @@ const listingDefault = {
   curatedAddress: '',
   selectedTokenId: 0,
   curator: '',
-  curationTargetType: 1,
+  curationTargetType: 6,
   sortOrder: 0,
   hasTokenId: false,
   chainId: 1,
@@ -34,7 +34,7 @@ export function PrepListings({ curationContractAddress }: PrepAddListingsProps) 
     newObject.curatedAddress = ''
     newObject.selectedTokenId = 0
     newObject.curator = address
-    newObject.curationTargetType = 1
+    newObject.curationTargetType = 6
     newObject.sortOrder = 0
     newObject.hasTokenId = false
     newObject.chainId = 1

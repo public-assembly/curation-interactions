@@ -27,8 +27,15 @@ export function AddListings({
       })
     }
     */
+
+    //   if (listingsToAdd) {
+
+    //     return [listingsToAdd]
+    //   }
+    // }, [listingsToAdd])
+
     if (listingsToAdd) {
-      return [listingsToAdd]
+      return [Object.values(listingsToAdd)]
     }
   }, [listingsToAdd])
 
@@ -65,9 +72,9 @@ export function AddListings({
       <div className="flex w-full flex-row ">
         <button
           className="curation-interactions__add-listing-button h-[48px] w-full bg-[#050A09] p-2 text-[#ECF1F0]"
-          onClick={() => addListingWrite()}
-          // disabled={listings?.length === 0 ? true : false}
-        >
+          // onClick={() => addListingWrite()}
+          onClick={() => addListingWrite?.()}
+          disabled={listings?.length === 0 ? true : false}>
           Add
         </button>
       </div>

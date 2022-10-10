@@ -225,13 +225,13 @@ export function useCurationFunctions({
       hash: updateSortOrderWriteData?.hash,
     })
 
-  // setCurationPause
-  /*
+  // setCurationPaused
+
   const { config: setCurationPauseConfig, error: setCurationPauseConfigError } =
     usePrepareContractWrite({
       addressOrName: curationContractAddress,
       contractInterface: curatorAbi,
-      functionName: 'setCurationPause',
+      functionName: 'setCurationPaused',
       args: [newPause],
       enabled: newPause,
     })
@@ -242,12 +242,10 @@ export function useCurationFunctions({
     error: setCurationPauseWriteError,
   } = useContractWrite(setCurationPauseConfig)
 
-  
   const { data: txnSetCurationPauseData, status: txnSetCurationPauseStatus } =
     useWaitForTransaction({
       hash: setCurationPauseWriteData?.hash,
     })
-  */
 
   return {
     // getListings
@@ -328,7 +326,6 @@ export function useCurationFunctions({
     txnUpdateSortOrderStatus,
 
     // setCurationPause
-    /*
     setCurationPauseConfig,
     setCurationPauseConfigError,
     setCurationPauseWrite,
@@ -336,6 +333,5 @@ export function useCurationFunctions({
     setCurationPauseWriteError,
     txnSetCurationPauseData,
     txnSetCurationPauseStatus,
-    */
   }
 }
