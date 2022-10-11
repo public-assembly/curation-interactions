@@ -15,9 +15,9 @@ export type CurationValidationProps = {
   zoraApiKey?: string
 }
 
-const curationContractAddress = "0x9364E704f02a7CC69FE207cfD7FB03737642F0f8"
+const curationContractAddress = "0x52a64dA96d0A0078bEAD9158198f3881c4FCD066"
 
-const network = 5;
+const network = 1;
 
 const newCurationLimit = 10
 
@@ -33,9 +33,9 @@ const newSortOrderIds = [0, 1]
 
 const newSortOrderOrders = [1,2]
 
-const burnTokenId = 1
+const burnTokenId = 7
 
-const removeListingsTokenIds = [0,1]
+const removeListingsTokenIds = [7]
 
 function Functions() {
 
