@@ -64,7 +64,7 @@ export function useCurationFunctions({
   })
 
   const getListingsReturn = React.useMemo(
-    () => (getListingsRead ? getListingsRead : [[]]),
+    () => (getListingsRead ? getListingsRead : []),
     [getListingsRead]
   )
 
@@ -301,6 +301,7 @@ export function useCurationFunctions({
 
   return {
     // getListings
+    getListingsRead,
     getListingsReturn,
     getListingsError,
     getListingsLoading,
