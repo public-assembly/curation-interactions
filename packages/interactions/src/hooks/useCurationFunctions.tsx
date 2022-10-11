@@ -78,11 +78,16 @@ export function useCurationFunctions({
       enabled: listings,
     })
 
+  const addListingsConfigMemo = React.useMemo(
+    () => (addListingsConfig ? addListingsConfig : undefined),
+    [listings]
+  )
+
   const {
     write: addListingsWrite,
     data: addListingsWriteData,
     error: addListingsWriteError,
-  } = useContractWrite(addListingsConfig)
+  } = useContractWrite(addListingsConfigMemo)
 
   const { data: txnAddListingsData, status: txnAddListingsStatus } =
     useWaitForTransaction({
@@ -98,11 +103,16 @@ export function useCurationFunctions({
     enabled: listingToBurn,
   })
 
+  const burnConfigMemo = React.useMemo(
+    () => (burnConfig ? burnConfig : undefined),
+    [listingToBurn]
+  )
+
   const {
     write: burnWrite,
     data: burnWriteData,
     error: burnWriteError,
-  } = useContractWrite(burnConfig)
+  } = useContractWrite(burnConfigMemo)
 
   const { data: txnBurnData, status: txnBurnStatus } = useWaitForTransaction({
     hash: burnWriteData?.hash,
@@ -118,11 +128,16 @@ export function useCurationFunctions({
       enabled: listingsToBurn,
     })
 
+  const removeListingsConfigMemo = React.useMemo(
+    () => (removeListingsConfig ? removeListingsConfig : undefined),
+    [listingsToBurn]
+  )
+
   const {
     write: removeListingsWrite,
     data: removeListingsWriteData,
     error: removeListingsWriteError,
-  } = useContractWrite(removeListingsConfig)
+  } = useContractWrite(removeListingsConfigMemo)
 
   const { data: txnRemoveListingsData, status: txnRemoveListingsStatus } =
     useWaitForTransaction({
@@ -139,11 +154,16 @@ export function useCurationFunctions({
       enabled: curationLimit,
     })
 
+  const updateCurationLimitConfigMemo = React.useMemo(
+    () => (updateCurationLimitConfig ? updateCurationLimitConfig : undefined),
+    [curationLimit]
+  )
+
   const {
     write: updateCurationLimitWrite,
     data: updateCurationLimitWriteData,
     error: updateCurationLimitWriteError,
-  } = useContractWrite(updateCurationLimitConfig)
+  } = useContractWrite(updateCurationLimitConfigMemo)
 
   const { data: txnUpdateCurationLimitData, status: txnUpdateCurationLimitStatus } =
     useWaitForTransaction({
@@ -159,11 +179,16 @@ export function useCurationFunctions({
     enabled: freezeAtUnix,
   })
 
+  const freezeAtConfigMemo = React.useMemo(
+    () => (freezeAtConfig ? freezeAtConfig : undefined),
+    [freezeAtUnix]
+  )
+
   const {
     write: freezeAtWrite,
     data: freezeAtWriteData,
     error: freezeAtWriteError,
-  } = useContractWrite(freezeAtConfig)
+  } = useContractWrite(freezeAtConfigMemo)
 
   const { data: txnFreezeAtData, status: txnFreezeAtStatus } = useWaitForTransaction({
     hash: freezeAtWriteData?.hash,
@@ -179,11 +204,16 @@ export function useCurationFunctions({
       enabled: curatorAbi,
     })
 
+  const updateRendererConfigMemo = React.useMemo(
+    () => (updateRendererConfig ? updateRendererConfig : undefined),
+    [newRendererAddress, newRendererInitializer]
+  )
+
   const {
     write: updateRendererWrite,
     data: updateRendererWriteData,
     error: updateRendererWriteError,
-  } = useContractWrite(updateRendererConfig)
+  } = useContractWrite(updateRendererConfigMemo)
 
   const { data: txnUpdateRendererData, status: txnUpdateRendererStatus } =
     useWaitForTransaction({
@@ -200,11 +230,16 @@ export function useCurationFunctions({
       enabled: newCurationPass,
     })
 
+  const updateCurationPassConfigMemo = React.useMemo(
+    () => (updateCurationPassConfig ? updateCurationPassConfig : undefined),
+    [newCurationPass]
+  )
+
   const {
     write: updateCurationPassWrite,
     data: updateCurationPassWriteData,
     error: updateCurationPassWriteError,
-  } = useContractWrite(updateCurationPassConfig)
+  } = useContractWrite(updateCurationPassConfigMemo)
 
   const { data: txnUpdateCurationPassData, status: txnUpdateCurationPassStatus } =
     useWaitForTransaction({
@@ -221,11 +256,16 @@ export function useCurationFunctions({
       enabled: newSortOrderIds && newSortOrderOrders,
     })
 
+  const updateSortOrderConfigMemo = React.useMemo(
+    () => (updateSortOrderConfig ? updateSortOrderConfig : undefined),
+    [newSortOrderIds, newSortOrderOrders]
+  )
+
   const {
     write: updateSortOrderWrite,
     data: updateSortOrderWriteData,
     error: updateSortOrderWriteError,
-  } = useContractWrite(updateSortOrderConfig)
+  } = useContractWrite(updateSortOrderConfigMemo)
 
   const { data: txnUpdateSortOrderData, status: txnUpdateSortOrderStatus } =
     useWaitForTransaction({
@@ -243,11 +283,16 @@ export function useCurationFunctions({
       enabled: newPause,
     })
 
+  const setCurationPauseConfigMemo = React.useMemo(
+    () => (setCurationPauseConfig ? setCurationPauseConfig : undefined),
+    [newPause]
+  )
+
   const {
     write: setCurationPauseWrite,
     data: setCurationPauseWriteData,
     error: setCurationPauseWriteError,
-  } = useContractWrite(setCurationPauseConfig)
+  } = useContractWrite(setCurationPauseConfigMemo)
 
   const { data: txnSetCurationPauseData, status: txnSetCurationPauseStatus } =
     useWaitForTransaction({
@@ -261,7 +306,7 @@ export function useCurationFunctions({
     getListingsLoading,
 
     // addListings
-    addListingsConfig,
+    addListingsConfigMemo,
     addListingsConfigError,
     addListingsWrite,
     addListingsWriteData,
@@ -270,7 +315,7 @@ export function useCurationFunctions({
     txnAddListingsStatus,
 
     // burn
-    burnConfig,
+    burnConfigMemo,
     burnConfigError,
     burnWrite,
     burnWriteData,
@@ -279,7 +324,7 @@ export function useCurationFunctions({
     txnBurnStatus,
 
     // removeListings
-    removeListingsConfig,
+    removeListingsConfigMemo,
     removeListingsConfigError,
     removeListingsWrite,
     removeListingsWriteData,
@@ -287,8 +332,8 @@ export function useCurationFunctions({
     txnRemoveListingsData,
     txnRemoveListingsStatus,
 
-    // updateCurationLimit
-    updateCurationLimitConfig,
+    // freezeAt
+    updateCurationLimitConfigMemo,
     updateCurationLimitConfigError,
     updateCurationLimitWrite,
     updateCurationLimitWriteData,
@@ -297,7 +342,7 @@ export function useCurationFunctions({
     txnUpdateCurationLimitStatus,
 
     // freezeAt
-    freezeAtConfig,
+    freezeAtConfigMemo,
     freezeAtConfigError,
     freezeAtWrite,
     freezeAtWriteData,
@@ -306,7 +351,7 @@ export function useCurationFunctions({
     txnFreezeAtStatus,
 
     // updateRenderer
-    updateRendererConfig,
+    updateRendererConfigMemo,
     updateRendererConfigError,
     updateRendererWrite,
     updateRendererWriteData,
@@ -315,7 +360,7 @@ export function useCurationFunctions({
     txnUpdateRendererStatus,
 
     // updateCurationPass
-    updateCurationPassConfig,
+    updateCurationPassConfigMemo,
     updateCurationPassConfigError,
     updateCurationPassWrite,
     updateCurationPassWriteData,
@@ -324,7 +369,7 @@ export function useCurationFunctions({
     txnUpdateCurationPassStatus,
 
     // updateSortOrder
-    updateSortOrderConfig,
+    updateSortOrderConfigMemo,
     updateSortOrderConfigError,
     updateSortOrderWrite,
     updateSortOrderWriteData,
@@ -333,7 +378,7 @@ export function useCurationFunctions({
     txnUpdateSortOrderStatus,
 
     // setCurationPause
-    setCurationPauseConfig,
+    setCurationPauseConfigMemo,
     setCurationPauseConfigError,
     setCurationPauseWrite,
     setCurationPauseWriteData,
