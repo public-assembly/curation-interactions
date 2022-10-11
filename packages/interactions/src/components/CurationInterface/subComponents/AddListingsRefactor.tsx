@@ -40,46 +40,51 @@ export function AddListings({
   }, [listingsToAdd])
 
   const {
-    addListingWrite,
-    addListingWriteError,
-    addListingConfig,
-    addListingConfigError,
-    txnAddListingStatus,
+    addListingsWrite,
+    addListingsWriteError,
+    addListingsConfigMemo,
+    addListingsConfigError,
+    txnAddListingsStatus,
   } = useCurationFunctions({
     curationContractAddress,
     listings,
   })
 
   React.useEffect(() => {
-    console.log('txnAddListingStatus', txnAddListingStatus)
-    console.log('addListingWriteError', addListingWriteError)
-    console.log('addListingConfig', addListingConfig)
-    console.log('addListingConfigError', addListingConfigError)
-  }, [txnAddListingStatus, addListingWriteError, addListingConfig, addListingConfigError])
+    console.log('txnAddListingsStatus', txnAddListingsStatus)
+    console.log('addListingsWriteError', addListingsWriteError)
+    console.log('addListingsConfig', addListingsConfigMemo)
+    console.log('addListingsConfigError', addListingsConfigError)
+  }, [
+    txnAddListingsStatus,
+    addListingsWriteError,
+    addListingsConfigMemo,
+    addListingsConfigError,
+  ])
 
-  const handleAddListing = React.useCallback(() => {
-    console.log(listings, addListingConfigError)
-    addListingWrite()
+  const handleaddListings = React.useCallback(() => {
+    console.log(listings, addListingsConfigError)
+    addListingsWrite()
     // setTxInProgress(true)
-  }, [listings, addListingConfigError, setTxInProgress])
+  }, [listings, addListingsConfigError, setTxInProgress])
 
   React.useEffect(() => {
-    if (txnAddListingStatus) setTxInProgress(false)
-  }, [txnAddListingStatus, txInProgress])
+    if (txnAddListingsStatus) setTxInProgress(false)
+  }, [txnAddListingsStatus, txInProgress])
 
   return (
     <div className="mb-[24px] flex w-full flex-col">
       <div className="flex w-full flex-row ">
         <button
           className="curation-interactions__add-listing-button h-[48px] w-full bg-[#050A09] p-2 text-[#ECF1F0]"
-          // onClick={() => addListingWrite()}
-          onClick={() => addListingWrite?.()}
+          // onClick={() => addListingsWrite()}
+          onClick={() => addListingsWrite?.()}
           disabled={listings?.length === 0 ? true : false}>
           Add
         </button>
       </div>
       {txInProgress ? 'Transaction Processing' : null}
-      {txnAddListingStatus !== 'idle' ? 'Transaction successful' : null}
+      {txnAddListingsStatus !== 'idle' ? 'Transaction successful' : null}
     </div>
   )
 }
