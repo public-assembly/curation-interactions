@@ -63,8 +63,13 @@ export function useCurationFunctions({
     functionName: 'getListings',
   })
 
+  const getListingsReturn = React.useMemo(
+    () => (getListingsRead ? getListingsRead : [[]]),
+    [getListingsRead]
+  )
+
   // addListings
-  const { config: addListingConfig, error: addListingConfigError } =
+  const { config: addListingsConfig, error: addListingsConfigError } =
     usePrepareContractWrite({
       addressOrName: curationContractAddress,
       contractInterface: curatorAbi,
@@ -74,14 +79,15 @@ export function useCurationFunctions({
     })
 
   const {
-    write: addListingWrite,
-    data: addListingWriteData,
-    error: addListingWriteError,
-  } = useContractWrite(addListingConfig)
+    write: addListingsWrite,
+    data: addListingsWriteData,
+    error: addListingsWriteError,
+  } = useContractWrite(addListingsConfig)
 
-  const { data: txnAddListingData, status: txnAddListingStatus } = useWaitForTransaction({
-    hash: addListingWriteData?.hash,
-  })
+  const { data: txnAddListingsData, status: txnAddListingsStatus } =
+    useWaitForTransaction({
+      hash: addListingsWriteData?.hash,
+    })
 
   // burn
   const { config: burnConfig, error: burnConfigError } = usePrepareContractWrite({
@@ -102,25 +108,26 @@ export function useCurationFunctions({
     hash: burnWriteData?.hash,
   })
 
-  // burnBatch
-  const { config: burnBatchConfig, error: burnBatchConfigError } =
+  // removeListings
+  const { config: removeListingsConfig, error: removeListingsConfigError } =
     usePrepareContractWrite({
       addressOrName: curationContractAddress,
       contractInterface: curatorAbi,
-      functionName: 'burnBatch',
+      functionName: 'removeListings',
       args: [listingsToBurn],
       enabled: listingsToBurn,
     })
 
   const {
-    write: burnBatchWrite,
-    data: burnBatchWriteData,
-    error: burnBatchWriteError,
-  } = useContractWrite(burnBatchConfig)
+    write: removeListingsWrite,
+    data: removeListingsWriteData,
+    error: removeListingsWriteError,
+  } = useContractWrite(removeListingsConfig)
 
-  const { data: txnBurnBatchData, status: txnBurnBatchStatus } = useWaitForTransaction({
-    hash: burnBatchWriteData?.hash,
-  })
+  const { data: txnRemoveListingsData, status: txnRemoveListingsStatus } =
+    useWaitForTransaction({
+      hash: removeListingsWriteData?.hash,
+    })
 
   // updateCurationLimit
   const { config: updateCurationLimitConfig, error: updateCurationLimitConfigError } =
@@ -249,18 +256,18 @@ export function useCurationFunctions({
 
   return {
     // getListings
-    getListingsRead,
+    getListingsReturn,
     getListingsError,
     getListingsLoading,
 
-    // addListing
-    addListingConfig,
-    addListingConfigError,
-    addListingWrite,
-    addListingWriteData,
-    addListingWriteError,
-    txnAddListingData,
-    txnAddListingStatus,
+    // addListings
+    addListingsConfig,
+    addListingsConfigError,
+    addListingsWrite,
+    addListingsWriteData,
+    addListingsWriteError,
+    txnAddListingsData,
+    txnAddListingsStatus,
 
     // burn
     burnConfig,
@@ -271,14 +278,14 @@ export function useCurationFunctions({
     txnBurnData,
     txnBurnStatus,
 
-    // burnBatch
-    burnBatchConfig,
-    burnBatchConfigError,
-    burnBatchWrite,
-    burnBatchWriteData,
-    burnBatchWriteError,
-    txnBurnBatchData,
-    txnBurnBatchStatus,
+    // removeListings
+    removeListingsConfig,
+    removeListingsConfigError,
+    removeListingsWrite,
+    removeListingsWriteData,
+    removeListingsWriteError,
+    txnRemoveListingsData,
+    txnRemoveListingsStatus,
 
     // updateCurationLimit
     updateCurationLimitConfig,
