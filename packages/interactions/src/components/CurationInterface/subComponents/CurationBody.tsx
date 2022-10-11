@@ -56,11 +56,11 @@ export function CurationBody({
           ) : (
             <div className="">
               <div className=" mb-[24px] flex h-fit w-full flex-row text-sm">
-                <div className="flex flex-row space-x-2 border-[1px] border-black px-2 py-1 text-[12px]">
+                <div className="mx-[24px] flex flex-row space-x-2 border-[1px] border-black px-2 py-1 text-[12px]">
                   <div className=" mt-1 flex h-[14px] w-[14px]  flex-row items-start justify-center self-start bg-black text-transparent">
                     {'✕'}
                   </div>
-                  <div className=" mx-[24px] flex h-fit w-full flex-row justify-start self-center">
+                  <div className="flex h-fit w-full flex-row justify-start self-center">
                     YOU MUST POSSES A CURATION PASS FOR THIS PLATFORM TO ACCESS
                     FUNCTIONALITY
                   </div>

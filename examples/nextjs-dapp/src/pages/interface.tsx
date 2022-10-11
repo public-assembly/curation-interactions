@@ -3,8 +3,8 @@ import { CurationInterface } from "@public-assembly/curation-interactions"
 import { ConnectButton } from "../components/ConnectButton"
 
 function Interface() {
-  const hardcodedCurationContractAddress = "0x9364E704f02a7CC69FE207cfD7FB03737642F0f8"
-  const hardcodedNetwork = 5
+  const hardcodedCurationContractAddress = "0x52a64dA96d0A0078bEAD9158198f3881c4FCD066"
+  const hardcodedNetwork = 1
   
   return (
     <section className="flex flex-col gap-4">

@@ -61,7 +61,7 @@ export function FunctionsTest({
     // txnAddListingsStatus,
 
     // burn
-    // burnConfig,
+    // burnConfigMemo,
     // burnConfigError,
     burnWrite,
     // burnWriteData,

@@ -4,9 +4,9 @@ import { useAccount } from 'wagmi'
 
 const hardcodedCuratorAddress = "0xEd824d01B337Fb423554185464dbF7D85034446B"
 
-const goerliNetwork = 5
+const network = 5
 
-// const mainnetNetwork = 1
+// const network = 1
 
 
 function Validation() {
@@ -28,7 +28,7 @@ function Validation() {
         <ValidationTest 
           userAddress={currentUserAddress}       
           curationContractAddress={hardcodedCuratorAddress}
-          network={goerliNetwork}
+          network={network}
         />        
       </section>
     )

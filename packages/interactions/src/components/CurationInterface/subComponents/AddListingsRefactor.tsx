@@ -72,6 +72,8 @@ export function AddListings({
     if (txnAddListingsStatus) setTxInProgress(false)
   }, [txnAddListingsStatus, txInProgress])
 
+  console.log('listings: ', listings)
+
   return (
     <div className="mb-[24px] flex w-full flex-col">
       <div className="flex w-full flex-row ">
@@ -79,7 +81,8 @@ export function AddListings({
           className="curation-interactions__add-listing-button h-[48px] w-full bg-[#050A09] p-2 text-[#ECF1F0]"
           // onClick={() => addListingsWrite()}
           onClick={() => addListingsWrite?.()}
-          disabled={listings?.length === 0 ? true : false}>
+          // disabled={listings?.length === 0 ? true : false}
+        >
           Add
         </button>
       </div>
