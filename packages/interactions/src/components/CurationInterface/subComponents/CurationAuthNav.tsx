@@ -15,11 +15,10 @@ export function CurationAuthNav({
 }: // addViewFn
 CurationAuthNavProps) {
   return (
-    <div className="flex h-fit w-full flex-row flex-wrap content-start px-[24px] ">
+    <div className="curation-interface__cta--wrapper mb-[12px] flex h-fit w-full flex-row flex-wrap">
       {!addView ? (
         <div className="flex w-full flex-row flex-wrap justify-start text-3xl">
-          <div className="mb-4 w-full text-[48px] sm:mb-0 sm:w-fit">Curation</div>
-          <div className="w-full text-[48px] sm:w-fit sm:pl-2">Manager</div>
+          <div className="mb-4 w-full text-[48px] sm:mb-0 sm:w-fit">Curation Manager</div>
           {ownerStatus ? (
             <div className=" mt-2 w-full text-[14px] font-light">
               You have access to manage the Neosound onchain playlist.

@@ -19,13 +19,13 @@ export function CurationHeader({
   const { isConnected, address } = useAccount()
 
   return (
-    <div className="h-fit w-full flex-row flex-wrap justify-center space-y-[24px] p-[24px] ">
-      <div className="flex w-full flex-row">
-        {!isConnected || (isConnected && !addView) ? (
-          <></>
-        ) : (
-          <div className="flex  w-full flex-row justify-start">
-            <button onClick={() => addViewFn(false)}>
+    <div className="curation-interface__header flex w-full flex-col items-center gap-[12px]">
+      <div className="curation-interface__header--nav-ui flex h-[32px] w-full flex-row items-center justify-between">
+        <div className="curation-interface__back-button--wrapper relative h-[32px] w-[32px]">
+          {!(!isConnected || (isConnected && !addView)) && (
+            <button
+              className="curation-interface__back-button"
+              onClick={() => addViewFn(false)}>
               <svg
                 width="32"
                 height="32"
@@ -43,24 +43,26 @@ export function CurationHeader({
                 />
               </svg>
             </button>
+          )}
+        </div>
+        {closeButton && (
+          <div className="curation-interface__close-button-wrapper justify-end">
+            {closeButton}
           </div>
         )}
-        {closeButton && <div className="justify-end">{closeButton}</div>}
       </div>
       {isConnected && (
-        <div className="flex h-fit w-full flex-row text-sm">
-          <div className="flex flex-row space-x-2 border-[1px] border-black px-2 py-1">
-            <div className=" flex h-[14px] w-[14px] flex-row self-center bg-[#00FD01] text-transparent">
-              {'blank'}
-            </div>
-            <div className=" flex h-fit w-fit flex-row justify-start self-center">
+        <div className="curation-interface__owner-status mb-[24px] flex w-full flex-row items-center justify-between text-sm">
+          <div className="curation-interface__connected-address--wrapper flex flex-row items-center gap-[8px] border-[1px] border-black px-2 py-1">
+            <div className="curation-interface__connected-indicator h-[14px] w-[14px] bg-[#00FD01]" />
+            <span className="curation-interface__connected-address">
               {shortenAddress(address)}
-            </div>
+            </span>
           </div>
           {ownerStatus && (
-            <div className="ml-2 flex flex-row  border-[1px] border-black py-1 px-2">
+            <span className="curation-interface__contract-owner ml-2 flex flex-row  border-[1px] border-black py-1 px-2">
               CONTRACT OWNER
-            </div>
+            </span>
           )}
         </div>
       )}

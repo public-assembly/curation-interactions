@@ -42,35 +42,31 @@ export function CurationInterface({
   }, [isConnected])
 
   return (
-    <div {...props} className="flex w-full flex-row flex-wrap justify-center text-black">
-      <div className="flex flex-wrap content-start">
-        <CurationHeader
-          ownerStatus={isCurationOwner}
-          addView={addTracksView}
-          addViewFn={setAddTracksView}
-          closeButton={closeButton}
-        />
-        {isConnected ? (
-          <CurationAuthNav
-            ownerStatus={isCurationOwner}
-            holderStatus={isCurationPassHolder}
-            addView={addTracksView}
-            addViewFn={setAddTracksView}
-          />
-        ) : (
-          <ConnectPrompt />
-        )}
-      </div>
-      <div className="flex w-full flex-wrap content-end">
-        <CurationBody
+    <div {...props} className="flex w-full flex-col text-black">
+      <CurationHeader
+        ownerStatus={isCurationOwner}
+        addView={addTracksView}
+        addViewFn={setAddTracksView}
+        closeButton={closeButton}
+      />
+      {isConnected ? (
+        <CurationAuthNav
           ownerStatus={isCurationOwner}
           holderStatus={isCurationPassHolder}
           addView={addTracksView}
           addViewFn={setAddTracksView}
-          curationContractAddress={curationContractAddress}
-          connectButton={connectButton}
         />
-      </div>
+      ) : (
+        <ConnectPrompt />
+      )}
+      <CurationBody
+        ownerStatus={isCurationOwner}
+        holderStatus={isCurationPassHolder}
+        addView={addTracksView}
+        addViewFn={setAddTracksView}
+        curationContractAddress={curationContractAddress}
+        connectButton={connectButton}
+      />
     </div>
   )
 }

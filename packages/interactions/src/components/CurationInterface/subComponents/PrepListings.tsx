@@ -80,7 +80,7 @@ export function PrepListings({ curationContractAddress }: PrepAddListingsProps) 
   )
 
   return (
-    <div className="mx-[24px] flex h-fit w-full flex-row flex-wrap">
+    <div className="flex h-fit w-full flex-row flex-wrap">
       <div className=" w-full ">
         {listingsToAdd?.length &&
           listingsToAdd.map(({ curatedAddress }, index) => {
