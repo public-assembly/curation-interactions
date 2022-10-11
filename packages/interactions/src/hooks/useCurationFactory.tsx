@@ -1,3 +1,6 @@
+/* @ts-ignore */
+import * as React from 'react'
+
 import { usePrepareContractWrite, useContractWrite, useWaitForTransaction } from 'wagmi'
 import { factoryAbi } from '../protocol/abi/factoryImpl'
 
