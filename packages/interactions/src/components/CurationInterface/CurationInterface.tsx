@@ -42,9 +42,7 @@ export function CurationInterface({
   }, [isConnected])
 
   return (
-    <div
-      {...props}
-      className="flex h-[600px] w-[343px] flex-row flex-wrap  justify-center bg-[#FF89DE] text-black sm:h-[514px] sm:w-[588px]">
+    <div {...props} className="flex w-full flex-row flex-wrap justify-center text-black">
       <div className="flex flex-wrap content-start">
         <CurationHeader
           ownerStatus={isCurationOwner}
