@@ -47,18 +47,18 @@ export function FunctionsTest({
 }: CurationFunctionsProps) {
   const {
     // getListings
-    getListingsRead,
+    getListingsReturn,
     // getListingsError,
     // getListingsLoading,
 
     // addListing
-    addListingConfig,
-    addListingConfigError,
-    addListingWrite,
-    // addListingWriteData,
-    // addListingWriteError,
-    // txnAddListingData,
-    // txnAddListingStatus,
+    // addListingsConfig,
+    addListingsConfigError,
+    addListingsWrite,
+    // addListingsWriteData,
+    // addListingsWriteError,
+    // txnAddListingsData,
+    // txnAddListingsStatus,
 
     // burn
     // burnConfig,
@@ -69,14 +69,14 @@ export function FunctionsTest({
     // txnBurnData,
     // txnBurnStatus,
 
-    // burnBatch
-    // burnBatchConfig,
-    // burnBatchConfigError,
-    burnBatchWrite,
-    // burnBatchWriteData,
-    // burnBatchWriteError,
-    // txnBurnBatchData,
-    // txnBurnBatchStatus,
+    // removeListings
+    // removeListingsConfig,
+    // removeListingsConfigError,
+    removeListingsWrite,
+    // removeListingsWriteData,
+    // removeListingsWriteError,
+    // txnRemoveListingsData,
+    // txnRemoveListingsStatus,
 
     // updateCurationLimit
     // updateCurationLimitConfig,
@@ -148,18 +148,18 @@ export function FunctionsTest({
 
   // console.log("getListings read return: ", getListingsString)
   // console.log("getListings read data: ", getListingsRead)
-  console.log('what data coming : ', addListingWrite)
-  console.log('addlistingconfig: ', addListingConfig)
-  console.log('addlistingconfig: ', addListingConfigError)
+  // console.log('what data coming : ', addListingWrite)
+  // console.log('addlistingconfig: ', addListingConfig)
+  // console.log('addlistingconfig: ', addListingConfigError)
 
   return (
     <>
       <button
         className="w-3/12 border-2 border-solid border-black hover:bg-black hover:text-white"
-        onClick={() => addListingWrite?.()}>
+        onClick={() => addListingsWrite?.()}>
         Add Listing
       </button>
-      <div>{addListingConfigError && addListingConfigError.message}</div>
+      <div>{addListingsConfigError && addListingsConfigError.message}</div>
       <button
         className="w-3/12 border-2 border-solid border-black hover:bg-black hover:text-white"
         onClick={() => burnWrite?.()}>
@@ -167,8 +167,8 @@ export function FunctionsTest({
       </button>
       <button
         className="w-3/12 border-2 border-solid border-black hover:bg-black hover:text-white"
-        onClick={() => burnBatchWrite?.()}>
-        {'Burn Listing (Batch)'}
+        onClick={() => removeListingsWrite?.()}>
+        {'Remove Listings'}
       </button>
       <button
         className="w-3/12 border-2 border-solid border-black hover:bg-black hover:text-white"
@@ -198,10 +198,9 @@ export function FunctionsTest({
       <button
         className="w-3/12 border-2 border-solid border-black hover:bg-black hover:text-white"
         onClick={() => updateCurationLimitWrite?.()}>
-        Update Curation Limi
+        Update Curation Limit
       </button>
-
-      <div>{'getListings read call results : ' + JSON.stringify(getListingsRead)}</div>
+      <div>{'getListings read call results : ' + JSON.stringify(getListingsReturn)}</div>
     </>
   )
 }
