@@ -14,11 +14,12 @@ function Interface() {
         </a>
       </Link>              
       <h1>Interface</h1>
-      <div className="flex flex-row flex-wrap justify-center">
+      <div className="bg-[#ff89de] p-[24px]">
         <CurationInterface
           curationContractAddress={hardcodedCurationContractAddress}
           network={hardcodedNetwork}
           connectButton={<ConnectButton />}
+          closeButton={<div>Close</div>}
         />
       </div>
     </section>

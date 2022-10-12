@@ -1,3 +1,6 @@
+/* @ts-ignore */
+import * as React from 'react'
+
 export function ConnectPrompt() {
   return (
     <div className="flex w-full flex-row flex-wrap justify-start text-3xl">
