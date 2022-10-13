@@ -2,7 +2,7 @@ import {
   useCurationFactory,
   useCurationFunctions,
   useValidation,
-  useGetListings,
+  useGetEditionsListings,
 } from './hooks/index'
 
 import { CurationInterface, ValidationTest, FunctionsTest } from './components/index'
@@ -11,7 +11,7 @@ export {
   useCurationFactory,
   useCurationFunctions,
   useValidation,
-  useGetListings,
+  useGetEditionsListings,
   CurationInterface,
   ValidationTest,
   FunctionsTest,

@@ -1,9 +1,9 @@
 import Link from "next/link"
 import { RawDisplayer } from "../components"
-import { useGetListings } from "@public-assembly/curation-interactions"
+import { useGetEditionsListings } from "@public-assembly/curation-interactions"
 
 function GetListings() {
-  const { rawListingsData, sanitizedListingsData } = useGetListings('0x52a64dA96d0A0078bEAD9158198f3881c4FCD066')
+  const { rawListingsData, sanitizedListingsData } = useGetEditionsListings('0x52a64dA96d0A0078bEAD9158198f3881c4FCD066')
   return (
     <section className="flex flex-col gap-4">
       <Link href="/">
@@ -13,7 +13,7 @@ function GetListings() {
       </Link>                
       <h1 className="flex flex-row gap-2">
         <span className="raw-displayer bg-gray-200 flex items-center px-2 rounded-md">
-          <code><pre>useGetListings</pre></code>
+          <code><pre>useGetEditionsListings</pre></code>
         </span>
         <span>Hook:</span>
       </h1>
