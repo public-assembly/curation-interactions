@@ -2,9 +2,12 @@ import * as React from 'react'
 import { useContractRead } from 'wagmi'
 import { curatorAbi } from '../protocol/abi/curatorImpl'
 import { SanitizedListingsDataReturn } from '../types/get-listings'
-import { sanitizeListingsData, validListingsFetcher } from '../lib'
+import { sanitizeListingsData, validListingsFetcher, ChainIds } from '../lib'
 
-export function useGetEditionsListings(curationContractAddress?: string) {
+export function useGetEditionsListings(
+  curationContractAddress?: string,
+  chainId?: ChainIds
+) {
   const [validListings, setValidListings] = React.useState<any | undefined>(undefined)
   const [validListingsLoading, setValidListingsLoading] = React.useState(true)
   const [validListingsError, setValidListingsError] = React.useState<any | null>(null)
@@ -21,7 +24,7 @@ export function useGetEditionsListings(curationContractAddress?: string) {
 
   React.useEffect(() => {
     async function getListings() {
-      await validListingsFetcher(sanitizedListings?.full)
+      await validListingsFetcher(sanitizedListings?.full, chainId)
         .then((res) => {
           setValidListings(res)
           setValidListingsLoading(false)
@@ -39,13 +42,13 @@ export function useGetEditionsListings(curationContractAddress?: string) {
       data,
       isLoading,
       error,
-      listingCount: data.length,
+      listingCount: data?.length,
     },
     sanitizedListingsData: {
       data: validListings,
       isLoading: validListingsLoading,
       error: validListingsError,
-      listingCount: validListings?.contractAddresses.length,
+      listingCount: validListings?.contractAddresses?.length,
     },
   } as {
     rawListingsData: {
