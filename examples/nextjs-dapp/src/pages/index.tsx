@@ -18,7 +18,14 @@ function Page() {
         <a className="text-blue-600 hover:underline">
           Functions
         </a>
-      </Link>      
+      </Link>  
+      <Link
+        href="/get-listings"
+      >
+        <a className="text-blue-600 hover:underline">
+          useGetListings
+        </a>
+      </Link>
       <Link
         href="/interface"
       >
