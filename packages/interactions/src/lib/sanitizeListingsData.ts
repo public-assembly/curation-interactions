@@ -1,7 +1,8 @@
 import { returnCurationType } from './returnCurationType'
 import { removeDuplicatesByKey } from './removeDuplicatesByKey'
-import { AddressZero } from '@ethersproject/constants'
 import { SanitizedListingsDataReturn } from '../types/get-listings'
+
+export const AddressZero = '0x0000000000000000000000000000000000000000'
 
 export function sanitizeListingsData(getListingsData?: any[]) {
   if (getListingsData) {
